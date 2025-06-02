@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo Educativo - 2º Ano</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .voltar-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .voltar-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #9b59b6;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        .jogo-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .info-jogo {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+
+        .info-valor {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .pergunta-container {
+            background: #e8f4fd;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid #3498db;
+        }
+
+        .pergunta {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .opcoes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .opcao {
+            background: white;
+            border: 3px solid #e9ecef;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .opcao:hover {
+            border-color: #3498db;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .opcao.correta {
+            border-color: #27ae60;
+            background: #d4edda;
+            animation: acerto 0.6s ease;
+        }
+
+        .opcao.incorreta {
+            border-color: #dc3545;
+            background: #f8d7da;
+            animation: erro 0.6s ease;
+        }
+
+        @keyframes acerto {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes erro {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+            100% { transform: translateX(0); }
+        }
+
+        .botoes {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-iniciar {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-iniciar:hover {
+            background: #2980b9;
+        }
+
+        .btn-proximo {
+            background: #27ae60;
+            color: white;
+            display: none;
+        }
+
+        .btn-proximo:hover {
+            background: #229954;
+        }
+
+        .resultado {
+            display: none;
+            text-align: center;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .resultado.mostrar {
+            display: block;
+        }
+
+        .pontuacao-final {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #9b59b6;
+            margin-bottom: 20px;
+        }
+
+        .feedback-final {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .btn-reiniciar {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-reiniciar:hover {
+            background: #c0392b;
+        }
+
+        @media (max-width: 768px) {
+            .opcoes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-jogo {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="ano2.html" class="voltar-btn">
+            ← Voltar ao 2º Ano
+        </a>
+        
+        <div class="header">
+            <h1>🎮 Quiz de Pesquisa - 2º Ano</h1>
+            <p>Testa os teus conhecimentos sobre pesquisa digital!</p>
+        </div>
+        
+        <div class="jogo-container">
+            <div class="info-jogo">
+                <div class="info-item">
+                    <div class="info-label">Pergunta</div>
+                    <div class="info-valor" id="perguntaAtual">0/5</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Pontuação</div>
+                    <div class="info-valor" id="pontuacao">0</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Tempo</div>
+                    <div class="info-valor" id="tempo">0s</div>
+                </div>
+            </div>
+
+            <div id="jogoInicio">
+                <div class="pergunta-container">
+                    <div class="pergunta">🔍 Pronto para testar os teus conhecimentos sobre pesquisa digital?</div>
+                    <p>Vais responder a 5 perguntas sobre como pesquisar na internet e organizar ficheiros. Boa sorte!</p>
+                </div>
+                <div class="botoes">
+                    <button class="btn btn-iniciar" onclick="iniciarJogo()">Começar Jogo</button>
+                </div>
+            </div>
+
+            <div id="jogoPerguntas" style="display: none;">
+                <div class="pergunta-container">
+                    <div class="pergunta" id="textoPergunta"></div>
+                </div>
+                <div class="opcoes-grid" id="opcoesContainer"></div>
+                <div class="botoes">
+                    <button class="btn btn-proximo" id="btnProximo" onclick="proximaPergunta()">Próxima Pergunta</button>
+                </div>
+            </div>
+
+            <div class="resultado" id="resultado">
+                <div class="pontuacao-final" id="pontuacaoFinal">0/5</div>
+                <div class="feedback-final" id="feedbackFinal"></div>
+                <div class="botoes">
+                    <button class="btn btn-reiniciar" onclick="reiniciarJogo()">Jogar Novamente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let perguntaAtual = 0;
+        let pontuacao = 0;
+        let tempoInicio = 0;
+        let intervalTempo;
+
+        const perguntas = [
+            {
+                pergunta: "Qual é a melhor forma de pesquisar sobre 'gatos' na internet?",
+                opcoes: ["Escrever 'gatos animais'", "Escrever 'asdfgh'", "Escrever 'gatos felinos domésticos'", "Escrever apenas 'a'"],
+                correta: 0
+            },
+            {
+                pergunta: "O que deves fazer antes de fechar um trabalho no computador?",
+                opcoes: ["Apagar tudo", "Guardar o ficheiro", "Desligar o computador", "Fechar os olhos"],
+                correta: 1
+            },
+            {
+                pergunta: "Como deves chamar a uma pasta com fotos de animais?",
+                opcoes: ["Pasta1", "Fotos_Animais", "ABC", "Ficheiro"],
+                correta: 1
+            },
+            {
+                pergunta: "O que é um motor de busca?",
+                opcoes: ["Um carro", "Uma ferramenta para encontrar informações", "Um jogo", "Uma música"],
+                correta: 1
+            },
+            {
+                pergunta: "Porque é importante fazer backup dos ficheiros?",
+                opcoes: ["Para ocupar espaço", "Para ter uma cópia de segurança", "Para apagar tudo", "Para fazer barulho"],
+                correta: 1
+            }
+        ];
+
+        function iniciarJogo() {
+            document.getElementById('jogoInicio').style.display = 'none';
+            document.getElementById('jogoPerguntas').style.display = 'block';
+            
+            perguntaAtual = 0;
+            pontuacao = 0;
+            tempoInicio = Date.now();
+            
+            // Iniciar cronómetro
+            intervalTempo = setInterval(atualizarTempo, 1000);
+            
+            mostrarPergunta();
+        }
+
+        function mostrarPergunta() {
+            const pergunta = perguntas[perguntaAtual];
+            
+            document.getElementById('perguntaAtual').textContent = `${perguntaAtual + 1}/5`;
+            document.getElementById('textoPergunta').textContent = pergunta.pergunta;
+            
+            const container = document.getElementById('opcoesContainer');
+            container.innerHTML = '';
+            
+            pergunta.opcoes.forEach((opcao, index) => {
+                const div = document.createElement('div');
+                div.className = 'opcao';
+                div.textContent = opcao;
+                div.onclick = () => selecionarOpcao(index);
+                container.appendChild(div);
+            });
+            
+            document.getElementById('btnProximo').style.display = 'none';
+        }
+
+        function selecionarOpcao(indice) {
+            const pergunta = perguntas[perguntaAtual];
+            const opcoes = document.querySelectorAll('.opcao');
+            
+            // Desativar cliques
+            opcoes.forEach(opcao => opcao.style.pointerEvents = 'none');
+            
+            if (indice === pergunta.correta) {
+                opcoes[indice].classList.add('correta');
+                pontuacao++;
+                document.getElementById('pontuacao').textContent = pontuacao;
+            } else {
+                opcoes[indice].classList.add('incorreta');
+                opcoes[pergunta.correta].classList.add('correta');
+            }
+            
+            setTimeout(() => {
+                document.getElementById('btnProximo').style.display = 'inline-block';
+            }, 1000);
+        }
+
+        function proximaPergunta() {
+            perguntaAtual++;
+            
+            if (perguntaAtual < perguntas.length) {
+                mostrarPergunta();
+            } else {
+                finalizarJogo();
+            }
+        }
+
+        function finalizarJogo() {
+            clearInterval(intervalTempo);
+            
+            document.getElementById('jogoPerguntas').style.display = 'none';
+            document.getElementById('pontuacaoFinal').textContent = `${pontuacao}/5`;
+            
+            let feedback = '';
+            if (pontuacao === 5) {
+                feedback = '🎉 Perfeito! És um expert em pesquisa digital!';
+            } else if (pontuacao >= 3) {
+                feedback = '👍 Muito bem! Continua a praticar!';
+            } else {
+                feedback = '💪 Boa tentativa! Tenta novamente!';
+            }
+            
+            document.getElementById('feedbackFinal').textContent = feedback;
+            document.getElementById('resultado').classList.add('mostrar');
+        }
+
+        function atualizarTempo() {
+            const tempoDecorrido = Math.floor((Date.now() - tempoInicio) / 1000);
+            document.getElementById('tempo').textContent = `${tempoDecorrido}s`;
+        }
+
+        function reiniciarJogo() {
+            document.getElementById('resultado').classList.remove('mostrar');
+            document.getElementById('jogoInicio').style.display = 'block';
+            
+            // Reset valores
+            document.getElementById('perguntaAtual').textContent = '0/5';
+            document.getElementById('pontuacao').textContent = '0';
+            document.getElementById('tempo').textContent = '0s';
+        }
+    </script>
+</body>
+</html>
+

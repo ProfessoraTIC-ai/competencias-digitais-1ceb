@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação Formativa - 2º Ano</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .voltar-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .voltar-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .pergunta {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .pergunta.ativa {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pergunta-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .pergunta-numero {
+            background: #27ae60;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        .pergunta-titulo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .opcoes {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .opcao {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .opcao:hover {
+            border-color: #27ae60;
+            background: #e8f5e8;
+        }
+
+        .opcao.selecionada {
+            border-color: #27ae60;
+            background: #e8f5e8;
+        }
+
+        .opcao.correta {
+            border-color: #27ae60;
+            background: #d4edda;
+        }
+
+        .opcao.incorreta {
+            border-color: #dc3545;
+            background: #f8d7da;
+        }
+
+        .botoes {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-proximo {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-proximo:hover {
+            background: #229954;
+        }
+
+        .btn-proximo:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+
+        .resultado {
+            display: none;
+            text-align: center;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .resultado.mostrar {
+            display: block;
+        }
+
+        .pontuacao {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 20px;
+        }
+
+        .feedback {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .btn-reiniciar {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-reiniciar:hover {
+            background: #2980b9;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="ano2.html" class="voltar-btn">
+            ← Voltar ao 2º Ano
+        </a>
+        
+        <div class="header">
+            <h1>✅ Avaliação Formativa - 2º Ano</h1>
+            <p>Testa os teus conhecimentos sobre competências digitais</p>
+        </div>
+        
+        <div class="quiz-container" id="quizContainer">
+            <div class="pergunta ativa" data-pergunta="1">
+                <div class="pergunta-header">
+                    <div class="pergunta-numero">1</div>
+                </div>
+                <div class="pergunta-titulo">O que é a Internet?</div>
+                <div class="opcoes">
+                    <div class="opcao" data-resposta="a">Um jogo no computador</div>
+                    <div class="opcao" data-resposta="b">Uma grande rede que liga computadores do mundo todo</div>
+                    <div class="opcao" data-resposta="c">Um programa para desenhar</div>
+                </div>
+                <div class="botoes">
+                    <button class="btn btn-proximo" onclick="proximaPergunta()" disabled>Próxima</button>
+                </div>
+            </div>
+
+            <div class="pergunta" data-pergunta="2">
+                <div class="pergunta-header">
+                    <div class="pergunta-numero">2</div>
+                </div>
+                <div class="pergunta-titulo">Para que serve um motor de busca?</div>
+                <div class="opcoes">
+                    <div class="opcao" data-resposta="a">Para encontrar informações na internet</div>
+                    <div class="opcao" data-resposta="b">Para jogar jogos</div>
+                    <div class="opcao" data-resposta="c">Para ouvir música</div>
+                </div>
+                <div class="botoes">
+                    <button class="btn btn-proximo" onclick="proximaPergunta()" disabled>Próxima</button>
+                </div>
+            </div>
+
+            <div class="pergunta" data-pergunta="3">
+                <div class="pergunta-header">
+                    <div class="pergunta-numero">3</div>
+                </div>
+                <div class="pergunta-titulo">O que são palavras-chave?</div>
+                <div class="opcoes">
+                    <div class="opcao" data-resposta="a">Palavras secretas</div>
+                    <div class="opcao" data-resposta="b">Palavras importantes para encontrar o que queremos</div>
+                    <div class="opcao" data-resposta="c">Palavras difíceis</div>
+                </div>
+                <div class="botoes">
+                    <button class="btn btn-proximo" onclick="proximaPergunta()" disabled>Próxima</button>
+                </div>
+            </div>
+
+            <div class="pergunta" data-pergunta="4">
+                <div class="pergunta-header">
+                    <div class="pergunta-numero">4</div>
+                </div>
+                <div class="pergunta-titulo">Para que serve uma pasta no computador?</div>
+                <div class="opcoes">
+                    <div class="opcao" data-resposta="a">Para organizar e guardar ficheiros</div>
+                    <div class="opcao" data-resposta="b">Para apagar tudo</div>
+                    <div class="opcao" data-resposta="c">Para fazer barulho</div>
+                </div>
+                <div class="botoes">
+                    <button class="btn btn-proximo" onclick="proximaPergunta()" disabled>Próxima</button>
+                </div>
+            </div>
+
+            <div class="pergunta" data-pergunta="5">
+                <div class="pergunta-header">
+                    <div class="pergunta-numero">5</div>
+                </div>
+                <div class="pergunta-titulo">Porque é importante fazer backup dos ficheiros?</div>
+                <div class="opcoes">
+                    <div class="opcao" data-resposta="a">Para ocupar mais espaço</div>
+                    <div class="opcao" data-resposta="b">Para ter uma cópia de segurança e não perder nada</div>
+                    <div class="opcao" data-resposta="c">Para o computador ficar mais lento</div>
+                </div>
+                <div class="botoes">
+                    <button class="btn btn-proximo" onclick="mostrarResultado()" disabled>Ver Resultado</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="resultado" id="resultado">
+            <div class="pontuacao" id="pontuacao">0/5</div>
+            <div class="feedback" id="feedback"></div>
+            <div class="botoes">
+                <button class="btn btn-reiniciar" onclick="reiniciarQuiz()">Tentar Novamente</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let perguntaAtual = 1;
+        let pontuacao = 0;
+        const respostasCorretas = {
+            1: 'b',
+            2: 'a', 
+            3: 'b',
+            4: 'a',
+            5: 'b'
+        };
+
+        // Adicionar event listeners às opções
+        document.querySelectorAll('.opcao').forEach(opcao => {
+            opcao.addEventListener('click', function() {
+                const pergunta = this.closest('.pergunta');
+                const opcoes = pergunta.querySelectorAll('.opcao');
+                
+                // Remover seleção anterior
+                opcoes.forEach(op => op.classList.remove('selecionada'));
+                
+                // Selecionar nova opção
+                this.classList.add('selecionada');
+                
+                // Ativar botão próximo
+                const btnProximo = pergunta.querySelector('.btn-proximo');
+                btnProximo.disabled = false;
+            });
+        });
+
+        function proximaPergunta() {
+            const perguntaAtiva = document.querySelector('.pergunta.ativa');
+            const opcaoSelecionada = perguntaAtiva.querySelector('.opcao.selecionada');
+            
+            if (opcaoSelecionada) {
+                const resposta = opcaoSelecionada.getAttribute('data-resposta');
+                const respostaCorreta = respostasCorretas[perguntaAtual];
+                
+                // Mostrar resposta correta
+                const opcoes = perguntaAtiva.querySelectorAll('.opcao');
+                opcoes.forEach(opcao => {
+                    if (opcao.getAttribute('data-resposta') === respostaCorreta) {
+                        opcao.classList.add('correta');
+                    } else if (opcao.classList.contains('selecionada') && opcao.getAttribute('data-resposta') !== respostaCorreta) {
+                        opcao.classList.add('incorreta');
+                    }
+                });
+                
+                // Verificar resposta
+                if (resposta === respostaCorreta) {
+                    pontuacao++;
+                }
+                
+                // Aguardar um pouco antes de avançar
+                setTimeout(() => {
+                    perguntaAtiva.classList.remove('ativa');
+                    perguntaAtual++;
+                    
+                    const proximaPerg = document.querySelector(`[data-pergunta="${perguntaAtual}"]`);
+                    if (proximaPerg) {
+                        proximaPerg.classList.add('ativa');
+                    }
+                }, 1500);
+            }
+        }
+
+        function mostrarResultado() {
+            const perguntaAtiva = document.querySelector('.pergunta.ativa');
+            const opcaoSelecionada = perguntaAtiva.querySelector('.opcao.selecionada');
+            
+            if (opcaoSelecionada) {
+                const resposta = opcaoSelecionada.getAttribute('data-resposta');
+                const respostaCorreta = respostasCorretas[perguntaAtual];
+                
+                // Mostrar resposta correta
+                const opcoes = perguntaAtiva.querySelectorAll('.opcao');
+                opcoes.forEach(opcao => {
+                    if (opcao.getAttribute('data-resposta') === respostaCorreta) {
+                        opcao.classList.add('correta');
+                    } else if (opcao.classList.contains('selecionada') && opcao.getAttribute('data-resposta') !== respostaCorreta) {
+                        opcao.classList.add('incorreta');
+                    }
+                });
+                
+                // Verificar resposta
+                if (resposta === respostaCorreta) {
+                    pontuacao++;
+                }
+                
+                // Mostrar resultado
+                setTimeout(() => {
+                    document.getElementById('quizContainer').style.display = 'none';
+                    document.getElementById('pontuacao').textContent = `${pontuacao}/5`;
+                    
+                    let feedback = '';
+                    if (pontuacao === 5) {
+                        feedback = '🎉 Excelente! Sabes tudo sobre competências digitais!';
+                    } else if (pontuacao >= 3) {
+                        feedback = '👍 Muito bem! Continua a aprender!';
+                    } else {
+                        feedback = '💪 Continua a praticar! Vais conseguir!';
+                    }
+                    
+                    document.getElementById('feedback').textContent = feedback;
+                    document.getElementById('resultado').classList.add('mostrar');
+                }, 1500);
+            }
+        }
+
+        function reiniciarQuiz() {
+            perguntaAtual = 1;
+            pontuacao = 0;
+            
+            // Resetar todas as perguntas
+            document.querySelectorAll('.pergunta').forEach((pergunta, index) => {
+                pergunta.classList.remove('ativa');
+                if (index === 0) pergunta.classList.add('ativa');
+                
+                // Resetar opções
+                pergunta.querySelectorAll('.opcao').forEach(opcao => {
+                    opcao.classList.remove('selecionada', 'correta', 'incorreta');
+                });
+                
+                // Desativar botão
+                pergunta.querySelector('.btn-proximo').disabled = true;
+            });
+            
+            // Esconder resultado
+            document.getElementById('resultado').classList.remove('mostrar');
+            document.getElementById('quizContainer').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Programação - 4º Ano</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .voltar-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .voltar-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        .jogo-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .nivel-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .nivel-atual {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .pontuacao-jogo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        .desafio {
+            background: #e3f2fd;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .desafio h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .codigo-area {
+            background: #2c3e50;
+            color: #ecf0f1;
+            border-radius: 10px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 20px;
+            min-height: 200px;
+            position: relative;
+        }
+
+        .blocos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .bloco {
+            background: #3498db;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .bloco:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .bloco.usado {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+
+        .sequencia {
+            background: #f8f9fa;
+            border: 2px dashed #bdc3c7;
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 100px;
+            margin-bottom: 20px;
+        }
+
+        .sequencia h4 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .sequencia-blocos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .bloco-sequencia {
+            background: #27ae60;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .bloco-sequencia:hover {
+            background: #e74c3c;
+        }
+
+        .botoes-jogo {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .btn-jogo {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-executar {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-executar:hover {
+            background: #229954;
+        }
+
+        .btn-limpar {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-limpar:hover {
+            background: #c0392b;
+        }
+
+        .btn-proximo {
+            background: #667eea;
+            color: white;
+            display: none;
+        }
+
+        .btn-proximo:hover {
+            background: #5a67d8;
+        }
+
+        .resultado-execucao {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .resultado-execucao.erro {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        .resultado-execucao.sucesso {
+            background: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .personagem {
+            width: 40px;
+            height: 40px;
+            background: #f39c12;
+            border-radius: 50%;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            transition: all 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .grid-jogo {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2px;
+            background: #34495e;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .celula {
+            width: 40px;
+            height: 40px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .celula.objetivo {
+            background: #e74c3c;
+        }
+
+        .celula.personagem {
+            background: #f39c12;
+        }
+
+        @media (max-width: 768px) {
+            .blocos-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="ano4.html" class="voltar-btn">
+            ← Voltar ao 4º Ano
+        </a>
+        
+        <div class="header">
+            <h1>🎮 Jogo de Programação - 4º Ano</h1>
+            <p>Aprende a programar criando algoritmos!</p>
+        </div>
+        
+        <div class="jogo-container">
+            <div class="nivel-info">
+                <div class="nivel-atual">Nível: <span id="nivelAtual">1</span></div>
+                <div class="pontuacao-jogo">Pontos: <span id="pontosJogo">0</span></div>
+            </div>
+            
+            <div class="desafio" id="desafio">
+                <h3>🎯 Desafio 1</h3>
+                <p>Programa o robot 🤖 para chegar ao objetivo vermelho! Arrasta os blocos de código para a sequência.</p>
+            </div>
+            
+            <div class="grid-jogo" id="gridJogo">
+                <!-- Grid será gerado dinamicamente -->
+            </div>
+            
+            <div class="sequencia">
+                <h4>📝 Sequência de Comandos:</h4>
+                <div class="sequencia-blocos" id="sequenciaBlocos"></div>
+            </div>
+            
+            <div class="blocos-container" id="blocosContainer">
+                <div class="bloco" data-comando="mover-direita">➡️ Mover Direita</div>
+                <div class="bloco" data-comando="mover-esquerda">⬅️ Mover Esquerda</div>
+                <div class="bloco" data-comando="mover-cima">⬆️ Mover Cima</div>
+                <div class="bloco" data-comando="mover-baixo">⬇️ Mover Baixo</div>
+            </div>
+            
+            <div class="botoes-jogo">
+                <button class="btn-jogo btn-executar" onclick="executarCodigo()">▶️ Executar</button>
+                <button class="btn-jogo btn-limpar" onclick="limparSequencia()">🗑️ Limpar</button>
+                <button class="btn-jogo btn-proximo" id="btnProximo" onclick="proximoNivel()">➡️ Próximo Nível</button>
+            </div>
+            
+            <div class="resultado-execucao" id="resultadoExecucao"></div>
+        </div>
+    </div>
+
+    <script>
+        let nivelAtual = 1;
+        let pontos = 0;
+        let sequenciaComandos = [];
+        let posicaoRobot = { x: 0, y: 0 };
+        let posicaoObjetivo = { x: 4, y: 4 };
+        
+        const niveis = {
+            1: {
+                titulo: "🎯 Desafio 1",
+                descricao: "Programa o robot 🤖 para chegar ao objetivo vermelho! Arrasta os blocos de código para a sequência.",
+                robotInicial: { x: 0, y: 0 },
+                objetivo: { x: 4, y: 4 },
+                solucaoMinima: 8
+            },
+            2: {
+                titulo: "🎯 Desafio 2", 
+                descricao: "Agora o robot precisa de fazer um caminho mais complexo!",
+                robotInicial: { x: 2, y: 0 },
+                objetivo: { x: 0, y: 2 },
+                solucaoMinima: 4
+            },
+            3: {
+                titulo: "🎯 Desafio 3",
+                descricao: "Último desafio! Mostra que és um verdadeiro programador!",
+                robotInicial: { x: 4, y: 0 },
+                objetivo: { x: 1, y: 3 },
+                solucaoMinima: 6
+            }
+        };
+
+        function inicializarJogo() {
+            criarGrid();
+            configurarEventos();
+            carregarNivel(nivelAtual);
+        }
+
+        function criarGrid() {
+            const grid = document.getElementById('gridJogo');
+            grid.innerHTML = '';
+            
+            for (let y = 0; y < 5; y++) {
+                for (let x = 0; x < 5; x++) {
+                    const celula = document.createElement('div');
+                    celula.className = 'celula';
+                    celula.dataset.x = x;
+                    celula.dataset.y = y;
+                    grid.appendChild(celula);
+                }
+            }
+        }
+
+        function carregarNivel(nivel) {
+            const nivelData = niveis[nivel];
+            if (!nivelData) return;
+            
+            document.getElementById('nivelAtual').textContent = nivel;
+            document.querySelector('#desafio h3').textContent = nivelData.titulo;
+            document.querySelector('#desafio p').textContent = nivelData.descricao;
+            
+            posicaoRobot = { ...nivelData.robotInicial };
+            posicaoObjetivo = { ...nivelData.objetivo };
+            
+            atualizarGrid();
+            limparSequencia();
+            document.getElementById('btnProximo').style.display = 'none';
+        }
+
+        function atualizarGrid() {
+            const celulas = document.querySelectorAll('.celula');
+            celulas.forEach(celula => {
+                celula.className = 'celula';
+                celula.textContent = '';
+            });
+            
+            // Posicionar robot
+            const celulaRobot = document.querySelector(`[data-x="${posicaoRobot.x}"][data-y="${posicaoRobot.y}"]`);
+            if (celulaRobot) {
+                celulaRobot.classList.add('personagem');
+                celulaRobot.textContent = '🤖';
+            }
+            
+            // Posicionar objetivo
+            const celulaObjetivo = document.querySelector(`[data-x="${posicaoObjetivo.x}"][data-y="${posicaoObjetivo.y}"]`);
+            if (celulaObjetivo) {
+                celulaObjetivo.classList.add('objetivo');
+                celulaObjetivo.textContent = '🎯';
+            }
+        }
+
+        function configurarEventos() {
+            const blocos = document.querySelectorAll('.bloco');
+            blocos.forEach(bloco => {
+                bloco.addEventListener('click', function() {
+                    if (!this.classList.contains('usado')) {
+                        adicionarComando(this.dataset.comando, this.textContent);
+                    }
+                });
+            });
+        }
+
+        function adicionarComando(comando, texto) {
+            sequenciaComandos.push(comando);
+            
+            const sequenciaBlocos = document.getElementById('sequenciaBlocos');
+            const blocoSequencia = document.createElement('div');
+            blocoSequencia.className = 'bloco-sequencia';
+            blocoSequencia.textContent = texto;
+            blocoSequencia.onclick = function() {
+                this.remove();
+                const index = sequenciaComandos.indexOf(comando);
+                if (index > -1) {
+                    sequenciaComandos.splice(index, 1);
+                }
+            };
+            
+            sequenciaBlocos.appendChild(blocoSequencia);
+        }
+
+        function limparSequencia() {
+            sequenciaComandos = [];
+            document.getElementById('sequenciaBlocos').innerHTML = '';
+            document.getElementById('resultadoExecucao').style.display = 'none';
+        }
+
+        async function executarCodigo() {
+            if (sequenciaComandos.length === 0) {
+                mostrarResultado('Adiciona comandos à sequência primeiro!', 'erro');
+                return;
+            }
+            
+            // Resetar posição do robot
+            const nivelData = niveis[nivelAtual];
+            posicaoRobot = { ...nivelData.robotInicial };
+            
+            // Executar comandos um por um
+            for (let i = 0; i < sequenciaComandos.length; i++) {
+                const comando = sequenciaComandos[i];
+                
+                switch (comando) {
+                    case 'mover-direita':
+                        if (posicaoRobot.x < 4) posicaoRobot.x++;
+                        break;
+                    case 'mover-esquerda':
+                        if (posicaoRobot.x > 0) posicaoRobot.x--;
+                        break;
+                    case 'mover-cima':
+                        if (posicaoRobot.y > 0) posicaoRobot.y--;
+                        break;
+                    case 'mover-baixo':
+                        if (posicaoRobot.y < 4) posicaoRobot.y++;
+                        break;
+                }
+                
+                atualizarGrid();
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            // Verificar se chegou ao objetivo
+            if (posicaoRobot.x === posicaoObjetivo.x && posicaoRobot.y === posicaoObjetivo.y) {
+                pontos += 100;
+                document.getElementById('pontosJogo').textContent = pontos;
+                mostrarResultado('🎉 Parabéns! O robot chegou ao objetivo!', 'sucesso');
+                
+                if (nivelAtual < 3) {
+                    document.getElementById('btnProximo').style.display = 'inline-block';
+                } else {
+                    mostrarResultado('🏆 Fantástico! Completaste todos os níveis! És um verdadeiro programador!', 'sucesso');
+                }
+            } else {
+                mostrarResultado('❌ O robot não chegou ao objetivo. Tenta novamente!', 'erro');
+            }
+        }
+
+        function mostrarResultado(mensagem, tipo) {
+            const resultado = document.getElementById('resultadoExecucao');
+            resultado.textContent = mensagem;
+            resultado.className = `resultado-execucao ${tipo}`;
+            resultado.style.display = 'block';
+        }
+
+        function proximoNivel() {
+            nivelAtual++;
+            carregarNivel(nivelAtual);
+        }
+
+        // Inicializar jogo quando a página carregar
+        window.onload = inicializarJogo;
+    </script>
+</body>
+</html>
+

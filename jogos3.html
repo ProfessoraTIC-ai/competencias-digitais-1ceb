@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo Educativo - 3º Ano</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .voltar-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .voltar-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #0984e3;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        .jogo-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .info-jogo {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+
+        .info-valor {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .cenario-container {
+            background: #e3f2fd;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid #2196f3;
+        }
+
+        .cenario {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .opcoes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .opcao {
+            background: white;
+            border: 3px solid #e9ecef;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            text-align: left;
+        }
+
+        .opcao:hover {
+            border-color: #2196f3;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .opcao.correta {
+            border-color: #27ae60;
+            background: #d4edda;
+            animation: acerto 0.6s ease;
+        }
+
+        .opcao.incorreta {
+            border-color: #dc3545;
+            background: #f8d7da;
+            animation: erro 0.6s ease;
+        }
+
+        @keyframes acerto {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes erro {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+            100% { transform: translateX(0); }
+        }
+
+        .botoes {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-iniciar {
+            background: #2196f3;
+            color: white;
+        }
+
+        .btn-iniciar:hover {
+            background: #1976d2;
+        }
+
+        .btn-proximo {
+            background: #27ae60;
+            color: white;
+            display: none;
+        }
+
+        .btn-proximo:hover {
+            background: #229954;
+        }
+
+        .resultado {
+            display: none;
+            text-align: center;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .resultado.mostrar {
+            display: block;
+        }
+
+        .pontuacao-final {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #0984e3;
+            margin-bottom: 20px;
+        }
+
+        .feedback-final {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .btn-reiniciar {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-reiniciar:hover {
+            background: #c0392b;
+        }
+
+        @media (max-width: 768px) {
+            .opcoes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-jogo {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="ano3.html" class="voltar-btn">
+            ← Voltar ao 3º Ano
+        </a>
+        
+        <div class="header">
+            <h1>🎮 Simulador de Colaboração - 3º Ano</h1>
+            <p>Aprende a colaborar em situações reais!</p>
+        </div>
+        
+        <div class="jogo-container">
+            <div class="info-jogo">
+                <div class="info-item">
+                    <div class="info-label">Cenário</div>
+                    <div class="info-valor" id="cenarioAtual">0/5</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Pontuação</div>
+                    <div class="info-valor" id="pontuacao">0</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Colaboração</div>
+                    <div class="info-valor" id="nivelColaboracao">Iniciante</div>
+                </div>
+            </div>
+
+            <div id="jogoInicio">
+                <div class="cenario-container">
+                    <div class="cenario">🤝 Bem-vindo ao Simulador de Colaboração!</div>
+                    <p>Vais enfrentar 5 situações onde precisas de colaborar com outros. Escolhe sempre a melhor forma de trabalhar em equipa!</p>
+                </div>
+                <div class="botoes">
+                    <button class="btn btn-iniciar" onclick="iniciarJogo()">Começar Simulação</button>
+                </div>
+            </div>
+
+            <div id="jogoCenarios" style="display: none;">
+                <div class="cenario-container">
+                    <div class="cenario" id="textoCenario"></div>
+                </div>
+                <div class="opcoes-grid" id="opcoesContainer"></div>
+                <div class="botoes">
+                    <button class="btn btn-proximo" id="btnProximo" onclick="proximoCenario()">Próximo Cenário</button>
+                </div>
+            </div>
+
+            <div class="resultado" id="resultado">
+                <div class="pontuacao-final" id="pontuacaoFinal">0/5</div>
+                <div class="feedback-final" id="feedbackFinal"></div>
+                <div class="botoes">
+                    <button class="btn btn-reiniciar" onclick="reiniciarJogo()">Simular Novamente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let cenarioAtual = 0;
+        let pontuacao = 0;
+
+        const cenarios = [
+            {
+                situacao: "🏫 A professora pediu para fazeres um trabalho sobre animais com 3 colegas. Como vais organizar o trabalho?",
+                opcoes: [
+                    "Cada um faz tudo sozinho e depois juntamos",
+                    "Dividimos os animais e cada um pesquisa alguns",
+                    "Só eu faço tudo porque sou o melhor",
+                    "Não fazemos nada e copiamos da internet"
+                ],
+                correta: 1,
+                explicacao: "Dividir as tarefas é a melhor forma de colaborar! Cada pessoa contribui com a sua parte."
+            },
+            {
+                situacao: "💻 Tens de criar uma apresentação com um colega, mas ele tem ideias diferentes das tuas. O que fazes?",
+                opcoes: [
+                    "Ignoro as ideias dele e faço à minha maneira",
+                    "Ouvimos as ideias um do outro e escolhemos as melhores",
+                    "Desisto e deixo-o fazer tudo",
+                    "Discuto com ele até ele concordar comigo"
+                ],
+                correta: 1,
+                explicacao: "Ouvir e respeitar as ideias dos outros é essencial para uma boa colaboração!"
+            },
+            {
+                situacao: "📱 O teu grupo precisa de comunicar fora da escola para terminar o projeto. Qual é a melhor forma?",
+                opcoes: [
+                    "Cada um faz a sua parte sem falar com ninguém",
+                    "Criamos um grupo online para partilhar ideias",
+                    "Só comunico com quem eu gosto",
+                    "Não comunico com ninguém"
+                ],
+                correta: 1,
+                explicacao: "Criar um espaço de comunicação online ajuda toda a equipa a estar coordenada!"
+            },
+            {
+                situacao: "🎨 Um colega fez um erro no documento partilhado do vosso projeto. Como reages?",
+                opcoes: [
+                    "Fico zangado e critico-o na frente de todos",
+                    "Ajudo-o a corrigir o erro de forma educada",
+                    "Apago o trabalho dele sem avisar",
+                    "Não digo nada e deixo o erro ficar"
+                ],
+                correta: 1,
+                explicacao: "Ajudar os colegas com paciência e educação fortalece o trabalho em equipa!"
+            },
+            {
+                situacao: "⏰ O prazo do projeto está a acabar e um colega ainda não fez a sua parte. O que fazes?",
+                opcoes: [
+                    "Excluo-o do grupo e faço tudo sozinho",
+                    "Ofereco-me para ajudar e pergunto se precisa de apoio",
+                    "Culpo-o por tudo correr mal",
+                    "Não faço nada e deixo o projeto ficar incompleto"
+                ],
+                correta: 1,
+                explicacao: "Oferecer ajuda aos colegas em dificuldades é o que faz uma equipa forte!"
+            }
+        ];
+
+        function iniciarJogo() {
+            document.getElementById('jogoInicio').style.display = 'none';
+            document.getElementById('jogoCenarios').style.display = 'block';
+            
+            cenarioAtual = 0;
+            pontuacao = 0;
+            
+            mostrarCenario();
+        }
+
+        function mostrarCenario() {
+            const cenario = cenarios[cenarioAtual];
+            
+            document.getElementById('cenarioAtual').textContent = `${cenarioAtual + 1}/5`;
+            document.getElementById('textoCenario').textContent = cenario.situacao;
+            
+            const container = document.getElementById('opcoesContainer');
+            container.innerHTML = '';
+            
+            cenario.opcoes.forEach((opcao, index) => {
+                const div = document.createElement('div');
+                div.className = 'opcao';
+                div.textContent = opcao;
+                div.onclick = () => selecionarOpcao(index);
+                container.appendChild(div);
+            });
+            
+            document.getElementById('btnProximo').style.display = 'none';
+        }
+
+        function selecionarOpcao(indice) {
+            const cenario = cenarios[cenarioAtual];
+            const opcoes = document.querySelectorAll('.opcao');
+            
+            // Desativar cliques
+            opcoes.forEach(opcao => opcao.style.pointerEvents = 'none');
+            
+            if (indice === cenario.correta) {
+                opcoes[indice].classList.add('correta');
+                pontuacao++;
+                document.getElementById('pontuacao').textContent = pontuacao;
+                
+                // Atualizar nível de colaboração
+                let nivel = 'Iniciante';
+                if (pontuacao >= 4) nivel = 'Expert';
+                else if (pontuacao >= 2) nivel = 'Colaborador';
+                document.getElementById('nivelColaboracao').textContent = nivel;
+            } else {
+                opcoes[indice].classList.add('incorreta');
+                opcoes[cenario.correta].classList.add('correta');
+            }
+            
+            // Mostrar explicação
+            setTimeout(() => {
+                alert(`💡 ${cenario.explicacao}`);
+                document.getElementById('btnProximo').style.display = 'inline-block';
+            }, 1000);
+        }
+
+        function proximoCenario() {
+            cenarioAtual++;
+            
+            if (cenarioAtual < cenarios.length) {
+                mostrarCenario();
+            } else {
+                finalizarJogo();
+            }
+        }
+
+        function finalizarJogo() {
+            document.getElementById('jogoCenarios').style.display = 'none';
+            document.getElementById('pontuacaoFinal').textContent = `${pontuacao}/5`;
+            
+            let feedback = '';
+            if (pontuacao === 5) {
+                feedback = '🎉 Incrível! És um verdadeiro expert em colaboração! Sabes trabalhar perfeitamente em equipa.';
+            } else if (pontuacao >= 3) {
+                feedback = '👍 Muito bem! Tens boas competências de colaboração. Continua a praticar!';
+            } else {
+                feedback = '💪 Boa tentativa! A colaboração é uma competência que se desenvolve com prática. Tenta novamente!';
+            }
+            
+            document.getElementById('feedbackFinal').textContent = feedback;
+            document.getElementById('resultado').classList.add('mostrar');
+        }
+
+        function reiniciarJogo() {
+            document.getElementById('resultado').classList.remove('mostrar');
+            document.getElementById('jogoInicio').style.display = 'block';
+            
+            // Reset valores
+            document.getElementById('cenarioAtual').textContent = '0/5';
+            document.getElementById('pontuacao').textContent = '0';
+            document.getElementById('nivelColaboracao').textContent = 'Iniciante';
+        }
+    </script>
+</body>
+</html>
+

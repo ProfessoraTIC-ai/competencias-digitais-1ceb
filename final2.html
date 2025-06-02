@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação Final - 2º Ano</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a8d8ea 0%, #aa96da 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .voltar-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .voltar-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #8e44ad;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        .aviso {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .aviso h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .pergunta {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .pergunta.ativa {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pergunta-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .pergunta-numero {
+            background: #8e44ad;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        .progresso {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 8px;
+            flex-grow: 1;
+            margin: 0 20px;
+            overflow: hidden;
+        }
+
+        .progresso-barra {
+            background: #8e44ad;
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .pergunta-titulo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .opcoes {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .opcao {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .opcao:hover {
+            border-color: #8e44ad;
+            background: #f3e5f5;
+        }
+
+        .opcao.selecionada {
+            border-color: #8e44ad;
+            background: #f3e5f5;
+        }
+
+        .opcao.correta {
+            border-color: #27ae60;
+            background: #d4edda;
+        }
+
+        .opcao.incorreta {
+            border-color: #dc3545;
+            background: #f8d7da;
+        }
+
+        .opcao-letra {
+            background: #8e44ad;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .botoes {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-proximo {
+            background: #8e44ad;
+            color: white;
+        }
+
+        .btn-proximo:hover {
+            background: #7d3c98;
+        }
+
+        .btn-proximo:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+
+        .resultado {
+            display: none;
+            text-align: center;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .resultado.mostrar {
+            display: block;
+        }
+
+        .pontuacao {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #8e44ad;
+            margin-bottom: 20px;
+        }
+
+        .classificacao {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .classificacao.excelente {
+            color: #27ae60;
+        }
+
+        .classificacao.bom {
+            color: #f39c12;
+        }
+
+        .classificacao.precisa-melhorar {
+            color: #e74c3c;
+        }
+
+        .feedback {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .btn-reiniciar {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-reiniciar:hover {
+            background: #2980b9;
+        }
+
+        .btn-imprimir {
+            background: #9b59b6;
+            color: white;
+        }
+
+        .btn-imprimir:hover {
+            background: #8e44ad;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .pergunta-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .progresso {
+                margin: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="ano2.html" class="voltar-btn">
+            ← Voltar ao 2º Ano
+        </a>
+        
+        <div class="header">
+            <h1>📄 Avaliação Final - 2º Ano</h1>
+            <p>Mostra tudo o que aprendeste sobre pesquisa e organização digital!</p>
+        </div>
+        
+        <div class="aviso">
+            <h3>⚠️ Instruções Importantes</h3>
+            <p>Esta é a tua avaliação final! Lê cada pergunta com atenção e escolhe a melhor resposta. Tens 10 perguntas sobre pesquisa e organização digital.</p>
+        </div>
+        
+        <div class="quiz-container" id="quizContainer">
+            <div class="pergunta ativa" data-pergunta="1">
+                <div class="pergunta-header">
+                    <div class="pergunta-numero">1</div>
+                    <div class="progresso">
+                        <div class="progresso-barra" style="width: 10%"></div>
+                    </div>
+                    <span>1/10</span>
+                </div>
+                <div class="pergunta-titulo">O que é a Internet?</div>
+                <div class="opcoes">
+                    <div class="opcao" data-resposta="a">
+                        <div class="opcao-letra">A</div>
+                        <div>Uma rede mundial que liga computadores para partilhar informação</div>
+                    </div>
+                    <div class="opcao" data-resposta="b">
+                        <div class="opcao-letra">B</div>
+                        <div>Um programa de computador</div>
+                    </div>
+                    <div class="opcao" data-resposta="c">
+                        <div class="opcao-letra">C</div>
+                        <div>Uma marca de computadores</div>
+                    </div>
+                </div>
+                <div class="botoes">
+                    <button class="btn btn-proximo" onclick="proximaPergunta()" disabled>Próxima</button>
+                </div>
+            </div>
+
+            <div class="pergunta" data-pergunta="2">
+                <div class="pergunta-header">
+                    <div class="pergunta-numero">2</div>
+                    <div class="progresso">
+                        <div class="progresso-barra" style="width: 20%"></div>
+                    </div>
+                    <span>2/10</span>
+                </div>
+                <div class="pergunta-titulo">Para que serve um motor de busca?</div>
+                <div class="opcoes">
+                    <div class="opcao" data-resposta="a">
+                        <div class="opcao-letra">A</div>
+                        <div>Para ligar o computador</div>
+                    </div>
+                    <div class="opcao" data-resposta="b">
+                        <div class="opcao-letra">B</div>
+                        <div>Para encontrar informação na Internet</div>
+                    </div>
+                    <div class="opcao" data-resposta="c">
+                        <div class="opcao-letra">C</div>
+                        <div>Para jogar jogos</div>
+                    </div>
+                </div>
+                <div class="botoes">
+                    <button class="btn btn-proximo" onclick="proximaPergunta()" disabled>Próxima</button>
+                </div>
+            </div>
+
+            <div class="pergunta" data-pergunta="3">
+                <div class="pergunta-header">
+                    <div class="pergunta-numero">3</div>
+                    <div class="progresso">
+                        <div class="progresso-barra" style="width: 30%"></div>
+                    </div>
+                    <span>3/10</span>
+                </div>
+                <div class="pergunta-titulo">O que são palavras-chave numa pesquisa?</div>
+                <div class="opcoes">
+                    <div class="opcao" data-resposta="a">
+                        <div class="opcao-letra">A</div>
+                        <div>Palavras importantes que descrevem o que procuramos</div>
+                    </div>
+                    <div class="opcao" data-resposta="b">
+                        <div class="opcao-letra">B</div>
+                        <div>Palavras secretas</div>
+                    </div>
+                    <div class="opcao" data-resposta="c">
+                        <div class="opcao-letra">C</div>
+                        <div>Palavras difíceis</div>
+                    </div>
+                </div>
+                <div class="botoes">
+                    <button class="btn btn-proximo" onclick="proximaPergunta()" disabled>Próxima</button>
+                </div>
+            </div>
+
+            <div class="pergunta" data-pergunta="4">
+                <div class="pergunta-header">
+                    <div class="pergunta-numero">4</div>
+                    <div class="progresso">
+                        <div class="progresso-barra" style="width: 40%"></div>
+                    </div>
+                    <span>4/10</span>
+                </div>
+                <div class="pergunta-titulo">O que é uma pasta no computador?</div>
+                <div class="opcoes">
+                    <div class="opcao" data-resposta="a">
+                        <div class="opcao-letra">A</div>
+                        <div>Um local onde organizamos e guardamos ficheiros</div>
+                    </div>
+                    <div class="opcao" data-resposta="b">
+                        <div class="opcao-letra">B</div>
+                        <div>Um tipo de jogo</div>
+                    </div>
+                    <div class="opcao" data-resposta="c">
+                        <div class="opcao-letra">C</div>
+                        <div>Uma parte do ecrã</div>
+                    </div>
+                </div>
+                <div class="botoes">
+                    <button class="btn btn-proximo" onclick="proximaPergunta()" disabled>Próxima</button>
+                </div>
+            </div>
+
+            <div class="pergunta" data-pergunta="5">
+                <div class="pergunta-header">
+                    <div class="pergunta-numero">5</div>
+                    <div class="progresso">
+                        <div class="progresso-barra" style="width: 50%"></div>
+                    </div>
+                    <span>5/10</span>
+                </div>
+                <div class="pergunta-titulo">Porque é importante dar nomes claros aos ficheiros?</div>
+                <div class="opcoes">
+                    <div class="opcao" data-resposta="a">
+                        <div class="opcao-letra">A</div>
+                        <div>Para os encontrar facilmente depois</div>
+                    </div>
+                    <div class="opcao" data-resposta="b">
+                        <div class="opcao-letra">B</div>
+                        <div>Para ocupar mais espaço</div>
+                    </div>
+                    <div class="opcao" data-resposta="c">
+                        <div class="opcao-letra">C</div>
+                        <div>Não é importante</div>
+                    </div>
+                </div>
+                <div class="botoes">
+                    <button class="btn btn-proximo" onclick="proximaPergunta()" disabled>Próxima</button>
+                </div>
+            </div>
+
+            <div class="pergunta" data-pergunta="6">
+                <div class="pergunta-header">
+                    <div class="pergunta-numero">6</div>
+                    <div class="progresso">
+                        <div class="progresso-barra" style="width: 60%"></div>
+                    </div>
+                    <span>6/10</span>
+                </div>
+                <div class="pergunta-titulo">O que significa "copiar" um ficheiro?</div>
+                <div class="opcoes">
+                    <div class="opcao" data-resposta="a">
+                        <div class="opcao-letra">A</div>
+                        <div>Fazer uma cópia igual noutro local</div>
+                    </div>
+                    <div class="opcao" data-resposta="b">
+                        <div class="opcao-letra">B</div>
+                        <div>Apagar o ficheiro</div>
+                    </div>
+                    <div class="opcao" data-resposta="c">
+                        <div class="opcao-letra">C</div>
+                        <div>Mudar o nome do ficheiro</div>
+                    </div>
+                </div>
+                <div class="botoes">
+                    <button class="btn btn-proximo" onclick="proximaPergunta()" disabled>Próxima</button>
+                </div>
+            </div>
+
+            <div class="pergunta" data-pergunta="7">
+                <div class="pergunta-header">
+                    <div class="pergunta-numero">7</div>
+                    <div class="progresso">
+                        <div class="progresso-barra" style="width: 70%"></div>
+                    </div>
+                    <span>7/10</span>
+                </div>
+                <div class="pergunta-titulo">O que é um backup?</div>
+                <div class="opcoes">
+                    <div class="opcao" data-resposta="a">
+                        <div class="opcao-letra">A</div>
+                        <div>Uma cópia de segurança dos nossos ficheiros importantes</div>
+                    </div>
+                    <div class="opcao" data-resposta="b">
+                        <div class="opcao-letra">B</div>
+                        <div>Um tipo de vírus</div>
+                    </div>
+                    <div class="opcao" data-resposta="c">
+                        <div class="opcao-letra">C</div>
+                        <div>Uma marca de computadores</div>
+                    </div>
+                </div>
+                <div class="botoes">
+                    <button class="btn btn-proximo" onclick="proximaPergunta()" disabled>Próxima</button>
+                </div>
+            </div>
+
+            <div class="pergunta" data-pergunta="8">
+                <div class="pergunta-header">
+                    <div class="pergunta-numero">8</div>
+                    <div class="progresso">
+                        <div class="progresso-barra" style="width: 80%"></div>
+                    </div>
+                    <span>8/10</span>
+                </div>
+                <div class="pergunta-titulo">Quando pesquisas na Internet, deves:</div>
+                <div class="opcoes">
+                    <div class="opcao" data-resposta="a">
+                        <div class="opcao-letra">A</div>
+                        <div>Usar palavras-chave específicas e verificar se a informação é confiável</div>
+                    </div>
+                    <div class="opcao" data-resposta="b">
+                        <div class="opcao-letra">B</div>
+                        <div>Acreditar em tudo o que encontras</div>
+                    </div>
+                    <div class="opcao" data-resposta="c">
+                        <div class="opcao-letra">C</div>
+                        <div>Usar apenas uma palavra</div>
+                    </div>
+                </div>
+                <div class="botoes">
+                    <button class="btn btn-proximo" onclick="proximaPergunta()" disabled>Próxima</button>
+                </div>
+            </div>
+
+            <div class="pergunta" data-pergunta="9">
+                <div class="pergunta-header">
+                    <div class="pergunta-numero">9</div>
+                    <div class="progresso">
+                        <div class="progresso-barra" style="width: 90%"></div>
+                    </div>
+                    <span>9/10</span>
+                </div>
+                <div class="pergunta-titulo">Como deves organizar os teus ficheiros?</div>
+                <div class="opcoes">
+                    <div class="opcao" data-resposta="a">
+                        <div class="opcao-letra">A</div>
+                        <div>Em pastas com nomes claros e por categorias</div>
+                    </div>
+                    <div class="opcao" data-resposta="b">
+                        <div class="opcao-letra">B</div>
+                        <div>Todos no mesmo local sem organização</div>
+                    </div>
+                    <div class="opcao" data-resposta="c">
+                        <div class="opcao-letra">C</div>
+                        <div>Não é preciso organizar</div>
+                    </div>
+                </div>
+                <div class="botoes">
+                    <button class="btn btn-proximo" onclick="proximaPergunta()" disabled>Próxima</button>
+                </div>
+            </div>
+
+            <div class="pergunta" data-pergunta="10">
+                <div class="pergunta-header">
+                    <div class="pergunta-numero">10</div>
+                    <div class="progresso">
+                        <div class="progresso-barra" style="width: 100%"></div>
+                    </div>
+                    <span>10/10</span>
+                </div>
+                <div class="pergunta-titulo">Qual é a melhor forma de guardar trabalhos importantes?</div>
+                <div class="opcoes">
+                    <div class="opcao" data-resposta="a">
+                        <div class="opcao-letra">A</div>
+                        <div>Fazer backup em locais seguros e dar nomes claros</div>
+                    </div>
+                    <div class="opcao" data-resposta="b">
+                        <div class="opcao-letra">B</div>
+                        <div>Guardar apenas no computador</div>
+                    </div>
+                    <div class="opcao" data-resposta="c">
+                        <div class="opcao-letra">C</div>
+                        <div>Não guardar, fazer sempre de novo</div>
+                    </div>
+                </div>
+                <div class="botoes">
+                    <button class="btn btn-proximo" onclick="mostrarResultado()" disabled>Ver Resultado</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="resultado" id="resultado">
+            <div class="pontuacao" id="pontuacao">0/10</div>
+            <div class="classificacao" id="classificacao"></div>
+            <div class="feedback" id="feedback"></div>
+            <div class="botoes">
+                <button class="btn btn-reiniciar" onclick="reiniciarQuiz()">Tentar Novamente</button>
+                <button class="btn btn-imprimir" onclick="window.print()">Imprimir Resultado</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let perguntaAtual = 1;
+        let pontuacao = 0;
+        const respostasCorretas = {
+            1: 'a', 2: 'b', 3: 'a', 4: 'a', 5: 'a',
+            6: 'a', 7: 'a', 8: 'a', 9: 'a', 10: 'a'
+        };
+
+        // Adicionar event listeners às opções
+        document.querySelectorAll('.opcao').forEach(opcao => {
+            opcao.addEventListener('click', function() {
+                const pergunta = this.closest('.pergunta');
+                const opcoes = pergunta.querySelectorAll('.opcao');
+                
+                // Remover seleção anterior
+                opcoes.forEach(op => op.classList.remove('selecionada'));
+                
+                // Selecionar nova opção
+                this.classList.add('selecionada');
+                
+                // Ativar botão próximo
+                const btnProximo = pergunta.querySelector('.btn-proximo');
+                btnProximo.disabled = false;
+            });
+        });
+
+        function proximaPergunta() {
+            const perguntaAtiva = document.querySelector('.pergunta.ativa');
+            const opcaoSelecionada = perguntaAtiva.querySelector('.opcao.selecionada');
+            
+            if (opcaoSelecionada) {
+                const resposta = opcaoSelecionada.getAttribute('data-resposta');
+                const respostaCorreta = respostasCorretas[perguntaAtual];
+                
+                // Mostrar resposta correta
+                const opcoes = perguntaAtiva.querySelectorAll('.opcao');
+                opcoes.forEach(opcao => {
+                    if (opcao.getAttribute('data-resposta') === respostaCorreta) {
+                        opcao.classList.add('correta');
+                    } else if (opcao.classList.contains('selecionada') && opcao.getAttribute('data-resposta') !== respostaCorreta) {
+                        opcao.classList.add('incorreta');
+                    }
+                });
+                
+                // Verificar resposta
+                if (resposta === respostaCorreta) {
+                    pontuacao++;
+                }
+                
+                // Aguardar um pouco antes de avançar
+                setTimeout(() => {
+                    perguntaAtiva.classList.remove('ativa');
+                    perguntaAtual++;
+                    
+                    const proximaPerg = document.querySelector(`[data-pergunta="${perguntaAtual}"]`);
+                    if (proximaPerg) {
+                        proximaPerg.classList.add('ativa');
+                    }
+                }, 1500);
+            }
+        }
+
+        function mostrarResultado() {
+            const perguntaAtiva = document.querySelector('.pergunta.ativa');
+            const opcaoSelecionada = perguntaAtiva.querySelector('.opcao.selecionada');
+            
+            if (opcaoSelecionada) {
+                const resposta = opcaoSelecionada.getAttribute('data-resposta');
+                const respostaCorreta = respostasCorretas[perguntaAtual];
+                
+                // Mostrar resposta correta
+                const opcoes = perguntaAtiva.querySelectorAll('.opcao');
+                opcoes.forEach(opcao => {
+                    if (opcao.getAttribute('data-resposta') === respostaCorreta) {
+                        opcao.classList.add('correta');
+                    } else if (opcao.classList.contains('selecionada') && opcao.getAttribute('data-resposta') !== respostaCorreta) {
+                        opcao.classList.add('incorreta');
+                    }
+                });
+                
+                // Verificar resposta
+                if (resposta === respostaCorreta) {
+                    pontuacao++;
+                }
+                
+                // Mostrar resultado
+                setTimeout(() => {
+                    document.getElementById('quizContainer').style.display = 'none';
+                    document.getElementById('pontuacao').textContent = `${pontuacao}/10`;
+                    
+                    let classificacao = '';
+                    let feedback = '';
+                    let classeCSS = '';
+                    
+                    if (pontuacao >= 9) {
+                        classificacao = '🏆 EXCELENTE!';
+                        feedback = 'Parabéns! Dominas perfeitamente a pesquisa e organização digital. És um verdadeiro especialista em encontrar e organizar informação!';
+                        classeCSS = 'excelente';
+                    } else if (pontuacao >= 7) {
+                        classificacao = '👍 MUITO BOM!';
+                        feedback = 'Muito bem! Tens bons conhecimentos sobre pesquisa e organização. Continua a praticar para ficares ainda melhor!';
+                        classeCSS = 'bom';
+                    } else if (pontuacao >= 5) {
+                        classificacao = '📚 BOM!';
+                        feedback = 'Bom trabalho! Já sabes muitas coisas importantes sobre pesquisa digital. Revê os tópicos onde tiveste mais dificuldades!';
+                        classeCSS = 'bom';
+                    } else {
+                        classificacao = '💪 CONTINUA A TENTAR!';
+                        feedback = 'Não desistas! Todos aprendemos ao nosso ritmo. Revê os conteúdos sobre pesquisa e organização e tenta novamente!';
+                        classeCSS = 'precisa-melhorar';
+                    }
+                    
+                    document.getElementById('classificacao').textContent = classificacao;
+                    document.getElementById('classificacao').className = `classificacao ${classeCSS}`;
+                    document.getElementById('feedback').textContent = feedback;
+                    document.getElementById('resultado').classList.add('mostrar');
+                }, 1500);
+            }
+        }
+
+        function reiniciarQuiz() {
+            perguntaAtual = 1;
+            pontuacao = 0;
+            
+            // Resetar todas as perguntas
+            document.querySelectorAll('.pergunta').forEach((pergunta, index) => {
+                pergunta.classList.remove('ativa');
+                if (index === 0) pergunta.classList.add('ativa');
+                
+                // Resetar opções
+                pergunta.querySelectorAll('.opcao').forEach(opcao => {
+                    opcao.classList.remove('selecionada', 'correta', 'incorreta');
+                });
+                
+                // Desativar botão
+                pergunta.querySelector('.btn-proximo').disabled = true;
+            });
+            
+            // Esconder resultado
+            document.getElementById('resultado').classList.remove('mostrar');
+            document.getElementById('quizContainer').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+

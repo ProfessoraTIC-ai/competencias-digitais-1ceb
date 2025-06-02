@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossário - 1º Ano</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .voltar-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .voltar-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #f39c12;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        .pesquisa {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .pesquisa input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #f39c12;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .pesquisa input:focus {
+            border-color: #e67e22;
+        }
+
+        .termos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .termo-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid #f39c12;
+        }
+
+        .termo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .termo-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .termo-emoji {
+            font-size: 2.5rem;
+        }
+
+        .termo-titulo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .termo-definicao {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .termo-exemplo {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 3px solid #3498db;
+        }
+
+        .termo-exemplo strong {
+            color: #3498db;
+        }
+
+        .termo-dica {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid #27ae60;
+        }
+
+        .termo-dica strong {
+            color: #27ae60;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #f39c12;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .termos-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="ano1.html" class="voltar-btn">
+            ← Voltar ao 1º Ano
+        </a>
+        
+        <div class="header">
+            <h1>📖 Glossário do 1º Ano</h1>
+            <p>Palavras digitais para os primeiros passos no mundo digital</p>
+        </div>
+        
+        <div class="pesquisa">
+            <input type="text" id="pesquisaInput" placeholder="🔍 Pesquisa uma palavra..." onkeyup="pesquisarTermos()">
+        </div>
+        
+        <div class="termos-grid" id="termosGrid">
+            <div class="termo-card" data-termo="computador">
+                <div class="badge">Exercícios de Segurança</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">💻</div>
+                    <div class="termo-titulo">Computador</div>
+                </div>
+                <div class="termo-definicao">
+                    É uma máquina que nos ajuda a fazer muitas coisas, como jogos, desenhos e aprender coisas novas.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Usamos o computador para fazer os exercícios de competências digitais.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> O computador precisa de energia para funcionar, como os nossos brinquedos!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="botao ligar">
+                <div class="badge">Exercícios de Segurança</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🔘</div>
+                    <div class="termo-titulo">Botão de Ligar</div>
+                </div>
+                <div class="termo-definicao">
+                    É um botão especial que faz o computador "acordar" e começar a trabalhar.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Carregamos no botão de ligar para o computador começar a funcionar.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> É como o interruptor da luz - liga e desliga!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="ecra">
+                <div class="badge">Exercícios de Segurança</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🖥️</div>
+                    <div class="termo-titulo">Ecrã</div>
+                </div>
+                <div class="termo-definicao">
+                    É como uma televisão do computador onde vemos as imagens, jogos e exercícios.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Vemos os nossos exercícios no ecrã do computador.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Não devemos tocar no ecrã com as mãos sujas!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="password">
+                <div class="badge">Exercícios de Segurança</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🔐</div>
+                    <div class="termo-titulo">Password</div>
+                </div>
+                <div class="termo-definicao">
+                    É uma palavra secreta que só nós sabemos, como a chave da nossa casa.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> A minha password pode ser o nome do meu animal favorito.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Nunca devemos dizer a nossa password a estranhos!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="mensagem">
+                <div class="badge">Exercícios de Comunicação</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">💌</div>
+                    <div class="termo-titulo">Mensagem</div>
+                </div>
+                <div class="termo-definicao">
+                    É como uma carta que enviamos pelo computador para falar com outras pessoas.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Posso enviar uma mensagem à minha avó para dizer olá.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Devemos ser sempre simpáticos nas nossas mensagens!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="internet">
+                <div class="badge">Exercícios de Comunicação</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🌐</div>
+                    <div class="termo-titulo">Internet</div>
+                </div>
+                <div class="termo-definicao">
+                    É como uma estrada gigante que liga todos os computadores do mundo.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Usamos a internet para ver vídeos e jogar jogos online.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Na internet devemos ter cuidado e pedir ajuda aos adultos!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="rato">
+                <div class="badge">Exercícios de Segurança</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🖱️</div>
+                    <div class="termo-titulo">Rato</div>
+                </div>
+                <div class="termo-definicao">
+                    É um objeto pequeno que nos ajuda a mexer uma setinha no ecrã do computador.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Uso o rato para clicar nos botões dos jogos.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Segura o rato suavemente, como se fosse um passarinho!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="teclado">
+                <div class="badge">Exercícios de Comunicação</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">⌨️</div>
+                    <div class="termo-titulo">Teclado</div>
+                </div>
+                <div class="termo-definicao">
+                    É como uma máquina de escrever com muitos botões para escrever letras e números.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Uso o teclado para escrever o meu nome nos exercícios.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Carrega nos botões devagar para não te enganares!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="ficheiro">
+                <div class="badge">Exercícios de Comunicação</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">📁</div>
+                    <div class="termo-titulo">Ficheiro</div>
+                </div>
+                <div class="termo-definicao">
+                    É como uma caixa onde guardamos os nossos trabalhos, desenhos ou fotos no computador.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Guardo os meus desenhos num ficheiro para não os perder.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Dá nomes fáceis aos teus ficheiros para os encontrares depois!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="jogo">
+                <div class="badge">Exercícios de Comunicação</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🎮</div>
+                    <div class="termo-titulo">Jogo Digital</div>
+                </div>
+                <div class="termo-definicao">
+                    É uma brincadeira divertida que fazemos no computador para aprender e nos divertirmos.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Jogo um jogo de memória para treinar o meu cérebro.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Os jogos são mais divertidos quando partilhamos com os amigos!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="imagem">
+                <div class="badge">Exercícios de Comunicação</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🖼️</div>
+                    <div class="termo-titulo">Imagem Digital</div>
+                </div>
+                <div class="termo-definicao">
+                    É uma fotografia ou desenho que vemos no ecrã do computador.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Vejo imagens dos meus animais favoritos no computador.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Podemos fazer os nossos próprios desenhos digitais!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="som">
+                <div class="badge">Exercícios de Comunicação</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🔊</div>
+                    <div class="termo-titulo">Som Digital</div>
+                </div>
+                <div class="termo-definicao">
+                    São os ruídos, música ou vozes que ouvimos através do computador.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Ouço música e sons divertidos nos jogos educativos.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Não ponhas o som muito alto para não incomodar os outros!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="clicar">
+                <div class="badge">Exercícios de Segurança</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">👆</div>
+                    <div class="termo-titulo">Clicar</div>
+                </div>
+                <div class="termo-definicao">
+                    É carregar num botão do rato para escolher algo no ecrã do computador.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Clico no botão para começar o jogo.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Um clique rápido é suficiente, não precisas de carregar muito forte!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="seguranca">
+                <div class="badge">Exercícios de Segurança</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🛡️</div>
+                    <div class="termo-titulo">Segurança Digital</div>
+                </div>
+                <div class="termo-definicao">
+                    São as regras que seguimos para estarmos seguros quando usamos o computador.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Não falo com estranhos na internet para estar seguro.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Sempre que tiveres dúvidas, pergunta a um adulto de confiança!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="partilhar">
+                <div class="badge">Exercícios de Comunicação</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🤝</div>
+                    <div class="termo-titulo">Partilhar</div>
+                </div>
+                <div class="termo-definicao">
+                    É mostrar os nossos trabalhos ou ideias a outras pessoas através do computador.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Partilho o meu desenho digital com a minha família.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Só partilha coisas boas e que fazem os outros felizes!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function pesquisarTermos() {
+            const input = document.getElementById('pesquisaInput');
+            const filter = input.value.toLowerCase();
+            const cards = document.querySelectorAll('.termo-card');
+
+            cards.forEach(card => {
+                const termo = card.getAttribute('data-termo').toLowerCase();
+                const titulo = card.querySelector('.termo-titulo').textContent.toLowerCase();
+                const definicao = card.querySelector('.termo-definicao').textContent.toLowerCase();
+                
+                if (termo.includes(filter) || titulo.includes(filter) || definicao.includes(filter)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+

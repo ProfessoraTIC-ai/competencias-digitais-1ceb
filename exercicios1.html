@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios Interativos - 1º Ano</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a8d8ea 0%, #aa96da 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .voltar-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .voltar-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        .exercicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .exercicio-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid #3498db;
+        }
+
+        .exercicio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .exercicio-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .exercicio-emoji {
+            font-size: 3rem;
+        }
+
+        .exercicio-info h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .exercicio-info p {
+            color: #7f8c8d;
+            font-size: 1rem;
+        }
+
+        .exercicio-descricao {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .exercicio-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .exercicio-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .badge {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .exercicios-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="ano1.html" class="voltar-btn">
+            ← Voltar ao 1º Ano
+        </a>
+        
+        <div class="header">
+            <h1>🧠 Exercícios Interativos - 1º Ano</h1>
+            <p>Pratica as competências digitais de forma divertida</p>
+        </div>
+        
+        <div class="exercicios-grid">
+            <div class="exercicio-card">
+                <div class="badge">Segurança Digital</div>
+                <div class="exercicio-header">
+                    <div class="exercicio-emoji">🛡️</div>
+                    <div class="exercicio-info">
+                        <h3>Exercício de Segurança</h3>
+                        <p>Aprende a estar seguro no computador</p>
+                    </div>
+                </div>
+                <div class="exercicio-descricao">
+                    Neste exercício vais aprender as regras básicas para usares o computador de forma segura. Vais descobrir como criar passwords seguras e como te protegeres online.
+                </div>
+                <button class="exercicio-btn" onclick="iniciarExercicioSeguranca()">
+                    Começar Exercício
+                </button>
+            </div>
+
+            <div class="exercicio-card">
+                <div class="badge">Comunicação Digital</div>
+                <div class="exercicio-header">
+                    <div class="exercicio-emoji">💬</div>
+                    <div class="exercicio-info">
+                        <h3>Exercício de Comunicação</h3>
+                        <p>Aprende a comunicar digitalmente</p>
+                    </div>
+                </div>
+                <div class="exercicio-descricao">
+                    Descobre como enviar mensagens, partilhar ideias e comunicar de forma respeitosa através do computador. Vais aprender a ser um bom comunicador digital.
+                </div>
+                <button class="exercicio-btn" onclick="iniciarExercicioComunicacao()">
+                    Começar Exercício
+                </button>
+            </div>
+
+            <div class="exercicio-card">
+                <div class="badge">Pesquisa Online</div>
+                <div class="exercicio-header">
+                    <div class="exercicio-emoji">🔍</div>
+                    <div class="exercicio-info">
+                        <h3>Exercício de Pesquisa</h3>
+                        <p>Aprende a pesquisar informação</p>
+                    </div>
+                </div>
+                <div class="exercicio-descricao">
+                    Descobre como procurar informação na internet de forma segura. Vais aprender a usar palavras-chave e a avaliar se a informação é verdadeira.
+                </div>
+                <button class="exercicio-btn" onclick="iniciarExercicioPesquisa()">
+                    Começar Exercício
+                </button>
+            </div>
+
+            <div class="exercicio-card">
+                <div class="badge">Criação Digital</div>
+                <div class="exercicio-header">
+                    <div class="exercicio-emoji">🎨</div>
+                    <div class="exercicio-info">
+                        <h3>Exercício de Criação</h3>
+                        <p>Aprende a criar conteúdos</p>
+                    </div>
+                </div>
+                <div class="exercicio-descricao">
+                    Vais aprender a criar os teus próprios conteúdos digitais! Descobre como fazer desenhos, escrever textos e criar apresentações simples no computador.
+                </div>
+                <button class="exercicio-btn" onclick="iniciarExercicioCriacao()">
+                    Começar Exercício
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function iniciarExercicioSeguranca() {
+            alert('🛡️ Exercício de Segurança\n\nVamos aprender as regras de segurança!\n\n1. Nunca partilhes a tua password\n2. Pede sempre ajuda a um adulto\n3. Não fales com estranhos online\n4. Só visita sites seguros\n\nParabéns! Completaste o exercício de segurança! 🎉');
+        }
+
+        function iniciarExercicioComunicacao() {
+            const nome = prompt('Qual é o teu nome?');
+            if (nome) {
+                alert(`Olá ${nome}! 💬\n\nVamos praticar comunicação digital!\n\nRegras importantes:\n1. Sê sempre simpático\n2. Usa palavras bonitas\n3. Respeita os outros\n4. Pede ajuda quando precisares\n\nMuito bem! Agora sabes comunicar digitalmente! 🌟`);
+            }
+        }
+
+        function iniciarExercicioPesquisa() {
+            const animal = prompt('🔍 Vamos pesquisar!\n\nQue animal queres pesquisar? (ex: cão, gato, leão)');
+            if (animal) {
+                alert(`Excelente escolha! 🔍\n\nPara pesquisar sobre "${animal}":\n\n1. Abre um motor de busca\n2. Escreve "${animal}" na caixa de pesquisa\n3. Clica em "Pesquisar"\n4. Escolhe sites seguros (com adultos)\n5. Lê a informação com atenção\n\nDica: Usa palavras simples para pesquisar!\n\nParabéns! Aprendeste a pesquisar! 🌟`);
+            }
+        }
+
+        function iniciarExercicioCriacao() {
+            const criacao = prompt('🎨 Vamos criar!\n\nO que queres criar?\n1. Desenho\n2. História\n3. Apresentação\n\nEscreve o número (1, 2 ou 3):');
+            
+            if (criacao === '1') {
+                alert('🎨 Criar um Desenho!\n\nPassos:\n1. Abre um programa de desenho\n2. Escolhe as cores que gostas\n3. Usa o pincel para desenhar\n4. Guarda o teu desenho\n5. Mostra aos teus amigos!\n\nParabéns! És um artista digital! 🌟');
+            } else if (criacao === '2') {
+                alert('📖 Criar uma História!\n\nPassos:\n1. Abre um programa de texto\n2. Pensa numa história divertida\n3. Escreve com cuidado\n4. Adiciona imagens se quiseres\n5. Guarda a tua história\n\nParabéns! És um escritor digital! 🌟');
+            } else if (criacao === '3') {
+                alert('📊 Criar uma Apresentação!\n\nPassos:\n1. Abre um programa de apresentações\n2. Escolhe um tema bonito\n3. Adiciona texto e imagens\n4. Faz slides divertidos\n5. Apresenta aos teus colegas\n\nParabéns! És um apresentador digital! 🌟');
+            } else {
+                alert('🎨 Que pena! Escolhe 1, 2 ou 3 da próxima vez!\n\nLembra-te: podes criar desenhos, histórias ou apresentações no computador!\n\nTenta novamente! 😊');
+            }
+        }
+    </script>
+</body>
+</html>
+

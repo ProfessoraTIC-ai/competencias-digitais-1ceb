@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogos Educativos - 1º Ano</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .voltar-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .voltar-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #9b59b6;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        .jogo-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .jogo-titulo {
+            font-size: 2rem;
+            color: #9b59b6;
+            margin-bottom: 20px;
+        }
+
+        .jogo-descricao {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+
+        .memoria-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 400px;
+            margin: 0 auto 30px;
+        }
+
+        .carta {
+            aspect-ratio: 1;
+            background: #f8f9fa;
+            border: 3px solid #e9ecef;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .carta:hover {
+            background: #e8f5e8;
+            border-color: #27ae60;
+        }
+
+        .carta.virada {
+            background: #d4edda;
+            border-color: #27ae60;
+        }
+
+        .carta.encontrada {
+            background: #d1ecf1;
+            border-color: #3498db;
+            cursor: default;
+        }
+
+        .jogo-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .stat {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+
+        .stat strong {
+            color: #9b59b6;
+        }
+
+        .btn-jogo {
+            background: #9b59b6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .btn-jogo:hover {
+            background: #8e44ad;
+            transform: translateY(-2px);
+        }
+
+        .mensagem {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .mensagem.mostrar {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .memoria-grid {
+                max-width: 300px;
+            }
+            
+            .jogo-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="ano1.html" class="voltar-btn">
+            ← Voltar ao 1º Ano
+        </a>
+        
+        <div class="header">
+            <h1>🎮 Jogos Educativos - 1º Ano</h1>
+            <p>Aprende brincando com jogos divertidos!</p>
+        </div>
+        
+        <div class="jogo-container">
+            <h2 class="jogo-titulo">🧠 Jogo da Memória Digital</h2>
+            <p class="jogo-descricao">
+                Encontra os pares de símbolos digitais! Clica nas cartas para as virar e tenta encontrar os pares iguais.
+            </p>
+            
+            <div class="jogo-stats">
+                <div class="stat">
+                    <strong>Tentativas:</strong> <span id="tentativas">0</span>
+                </div>
+                <div class="stat">
+                    <strong>Pares Encontrados:</strong> <span id="paresEncontrados">0</span> / 8
+                </div>
+                <div class="stat">
+                    <strong>Tempo:</strong> <span id="tempo">00:00</span>
+                </div>
+            </div>
+            
+            <div class="memoria-grid" id="memoriaGrid">
+                <!-- Cartas serão geradas pelo JavaScript -->
+            </div>
+            
+            <div>
+                <button class="btn-jogo" onclick="iniciarJogo()">Novo Jogo</button>
+                <button class="btn-jogo" onclick="mostrarDica()">💡 Dica</button>
+            </div>
+            
+            <div class="mensagem" id="mensagem"></div>
+        </div>
+    </div>
+
+    <script>
+        let cartas = [];
+        let cartasViradas = [];
+        let paresEncontrados = 0;
+        let tentativas = 0;
+        let tempoInicio = null;
+        let intervalTempo = null;
+        let jogoAtivo = false;
+
+        const simbolos = ['💻', '🖱️', '⌨️', '🖥️', '📱', '🔐', '🌐', '💌'];
+
+        function criarCartas() {
+            cartas = [];
+            const todosSimbolos = [...simbolos, ...simbolos]; // Duplicar para criar pares
+            
+            // Embaralhar
+            for (let i = todosSimbolos.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [todosSimbolos[i], todosSimbolos[j]] = [todosSimbolos[j], todosSimbolos[i]];
+            }
+            
+            // Criar objetos carta
+            todosSimbolos.forEach((simbolo, index) => {
+                cartas.push({
+                    id: index,
+                    simbolo: simbolo,
+                    virada: false,
+                    encontrada: false
+                });
+            });
+        }
+
+        function renderizarCartas() {
+            const grid = document.getElementById('memoriaGrid');
+            grid.innerHTML = '';
+            
+            cartas.forEach(carta => {
+                const elemento = document.createElement('div');
+                elemento.className = 'carta';
+                elemento.onclick = () => virarCarta(carta.id);
+                
+                if (carta.virada || carta.encontrada) {
+                    elemento.textContent = carta.simbolo;
+                    if (carta.encontrada) {
+                        elemento.classList.add('encontrada');
+                    } else {
+                        elemento.classList.add('virada');
+                    }
+                } else {
+                    elemento.textContent = '?';
+                }
+                
+                grid.appendChild(elemento);
+            });
+        }
+
+        function virarCarta(id) {
+            if (!jogoAtivo) return;
+            
+            const carta = cartas[id];
+            if (carta.virada || carta.encontrada || cartasViradas.length >= 2) return;
+            
+            carta.virada = true;
+            cartasViradas.push(carta);
+            renderizarCartas();
+            
+            if (cartasViradas.length === 2) {
+                tentativas++;
+                document.getElementById('tentativas').textContent = tentativas;
+                
+                setTimeout(verificarPar, 1000);
+            }
+        }
+
+        function verificarPar() {
+            const [carta1, carta2] = cartasViradas;
+            
+            if (carta1.simbolo === carta2.simbolo) {
+                // Par encontrado!
+                carta1.encontrada = true;
+                carta2.encontrada = true;
+                paresEncontrados++;
+                
+                document.getElementById('paresEncontrados').textContent = paresEncontrados;
+                
+                if (paresEncontrados === 8) {
+                    finalizarJogo();
+                }
+            } else {
+                // Não é par, virar de volta
+                carta1.virada = false;
+                carta2.virada = false;
+            }
+            
+            cartasViradas = [];
+            renderizarCartas();
+        }
+
+        function iniciarJogo() {
+            criarCartas();
+            renderizarCartas();
+            
+            paresEncontrados = 0;
+            tentativas = 0;
+            cartasViradas = [];
+            jogoAtivo = true;
+            
+            document.getElementById('paresEncontrados').textContent = '0';
+            document.getElementById('tentativas').textContent = '0';
+            document.getElementById('mensagem').classList.remove('mostrar');
+            
+            // Iniciar cronômetro
+            tempoInicio = Date.now();
+            intervalTempo = setInterval(atualizarTempo, 1000);
+        }
+
+        function atualizarTempo() {
+            if (!tempoInicio) return;
+            
+            const agora = Date.now();
+            const segundos = Math.floor((agora - tempoInicio) / 1000);
+            const minutos = Math.floor(segundos / 60);
+            const segsRestantes = segundos % 60;
+            
+            document.getElementById('tempo').textContent = 
+                `${minutos.toString().padStart(2, '0')}:${segsRestantes.toString().padStart(2, '0')}`;
+        }
+
+        function finalizarJogo() {
+            jogoAtivo = false;
+            clearInterval(intervalTempo);
+            
+            const tempoFinal = document.getElementById('tempo').textContent;
+            let mensagem = `🎉 Parabéns! Completaste o jogo!\n\n`;
+            mensagem += `⏱️ Tempo: ${tempoFinal}\n`;
+            mensagem += `🎯 Tentativas: ${tentativas}\n\n`;
+            
+            if (tentativas <= 12) {
+                mensagem += `🌟 Excelente memória!`;
+            } else if (tentativas <= 20) {
+                mensagem += `👍 Muito bem!`;
+            } else {
+                mensagem += `💪 Bom trabalho! Tenta novamente para melhorar!`;
+            }
+            
+            document.getElementById('mensagem').textContent = mensagem;
+            document.getElementById('mensagem').classList.add('mostrar');
+        }
+
+        function mostrarDica() {
+            alert('💡 Dicas para o Jogo da Memória:\n\n' +
+                  '1. Tenta lembrar-te onde viste cada símbolo\n' +
+                  '2. Começa pelas cartas dos cantos\n' +
+                  '3. Concentra-te e não tenhas pressa\n' +
+                  '4. Cada símbolo tem exatamente um par\n' +
+                  '5. Diverte-te enquanto aprendes! 🎮');
+        }
+
+        // Inicializar jogo ao carregar a página
+        window.onload = function() {
+            iniciarJogo();
+        };
+    </script>
+</body>
+</html>
+

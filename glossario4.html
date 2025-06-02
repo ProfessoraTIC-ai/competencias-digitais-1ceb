@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossário - 4º Ano</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff7675 0%, #fd79a8 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .voltar-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .voltar-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #e84393;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        .pesquisa-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .pesquisa-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .pesquisa-input:focus {
+            outline: none;
+            border-color: #e84393;
+        }
+
+        .termos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .termo-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-left: 5px solid #e84393;
+        }
+
+        .termo-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .categoria {
+            background: #e84393;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .termo-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .termo-icone {
+            font-size: 2rem;
+        }
+
+        .termo-nome {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .termo-definicao {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .exemplo {
+            background: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .exemplo strong {
+            color: #2980b9;
+        }
+
+        .dica {
+            background: #d4edda;
+            border-left: 4px solid #27ae60;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .dica strong {
+            color: #27ae60;
+        }
+
+        @media (max-width: 768px) {
+            .termos-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="ano4.html" class="voltar-btn">
+            ← Voltar ao 4º Ano
+        </a>
+        
+        <div class="header">
+            <h1>📖 Glossário do 4º Ano</h1>
+            <p>Palavras digitais para competências avançadas</p>
+        </div>
+        
+        <div class="pesquisa-container">
+            <input type="text" class="pesquisa-input" placeholder="🔍 Pesquisa uma palavra..." onkeyup="pesquisarTermos()">
+        </div>
+        
+        <div class="termos-grid" id="termosGrid">
+            <div class="termo-card" data-termo="programação algoritmo código">
+                <div class="categoria">Exercícios de Programação</div>
+                <div class="termo-header">
+                    <div class="termo-icone">💻</div>
+                    <div class="termo-nome">Programação</div>
+                </div>
+                <div class="termo-definicao">
+                    É criar instruções para o computador seguir, usando uma linguagem especial que ele entende.
+                </div>
+                <div class="exemplo">
+                    <strong>Exemplo:</strong> Faço programação quando crio um jogo simples ou uma animação no Scratch.
+                </div>
+                <div class="dica">
+                    <strong>Dica:</strong> Programar é como dar receitas muito detalhadas ao computador!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="algoritmo passos sequência lógica">
+                <div class="categoria">Exercícios de Programação</div>
+                <div class="termo-header">
+                    <div class="termo-icone">🔢</div>
+                    <div class="termo-nome">Algoritmo</div>
+                </div>
+                <div class="termo-definicao">
+                    É uma sequência de passos organizados para resolver um problema ou completar uma tarefa.
+                </div>
+                <div class="exemplo">
+                    <strong>Exemplo:</strong> O algoritmo para escovar os dentes: 1) Pegar na escova, 2) Pôr pasta, 3) Escovar, 4) Enxaguar.
+                </div>
+                <div class="dica">
+                    <strong>Dica:</strong> Pensa nos algoritmos como receitas passo a passo!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="código programação linguagem instruções">
+                <div class="categoria">Exercícios de Programação</div>
+                <div class="termo-header">
+                    <div class="termo-icone">📝</div>
+                    <div class="termo-nome">Código</div>
+                </div>
+                <div class="termo-definicao">
+                    São as instruções escritas numa linguagem especial que o computador consegue entender e executar.
+                </div>
+                <div class="exemplo">
+                    <strong>Exemplo:</strong> Escrevo código no Scratch para fazer um gato mover-se e falar.
+                </div>
+                <div class="dica">
+                    <strong>Dica:</strong> O código é como uma linguagem secreta entre tu e o computador!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="depuração debug erro correção">
+                <div class="categoria">Exercícios de Programação</div>
+                <div class="termo-header">
+                    <div class="termo-icone">🐛</div>
+                    <div class="termo-nome">Depuração</div>
+                </div>
+                <div class="termo-definicao">
+                    É encontrar e corrigir erros no código para que o programa funcione corretamente.
+                </div>
+                <div class="exemplo">
+                    <strong>Exemplo:</strong> Faço depuração quando o meu jogo não funciona e preciso de encontrar o erro.
+                </div>
+                <div class="dica">
+                    <strong>Dica:</strong> Todos os programadores fazem depuração - é normal ter erros!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="variável dados informação guardar">
+                <div class="categoria">Exercícios de Programação</div>
+                <div class="termo-header">
+                    <div class="termo-icone">📦</div>
+                    <div class="termo-nome">Variável</div>
+                </div>
+                <div class="termo-definicao">
+                    É como uma caixa onde o programa guarda informações que podem mudar durante a execução.
+                </div>
+                <div class="exemplo">
+                    <strong>Exemplo:</strong> Uso uma variável "pontos" para guardar a pontuação do meu jogo.
+                </div>
+                <div class="dica">
+                    <strong>Dica:</strong> Pensa nas variáveis como gavetas com etiquetas!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="ética digital comportamento online respeito">
+                <div class="categoria">Exercícios de Ética</div>
+                <div class="termo-header">
+                    <div class="termo-icone">⚖️</div>
+                    <div class="termo-nome">Ética Digital</div>
+                </div>
+                <div class="termo-definicao">
+                    São as regras de bom comportamento e respeito quando usamos tecnologia e internet.
+                </div>
+                <div class="exemplo">
+                    <strong>Exemplo:</strong> Pratico ética digital quando não copio trabalhos dos outros e sou respeitoso online.
+                </div>
+                <div class="dica">
+                    <strong>Dica:</strong> Comporta-te online como te comportas na vida real!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="privacidade dados pessoais proteção">
+                <div class="categoria">Exercícios de Ética</div>
+                <div class="termo-header">
+                    <div class="termo-icone">🔒</div>
+                    <div class="termo-nome">Privacidade</div>
+                </div>
+                <div class="termo-definicao">
+                    É manter as nossas informações pessoais seguras e decidir com quem as partilhamos.
+                </div>
+                <div class="exemplo">
+                    <strong>Exemplo:</strong> Protejo a minha privacidade não partilhando a minha morada com estranhos online.
+                </div>
+                <div class="dica">
+                    <strong>Dica:</strong> As tuas informações pessoais são como tesouros - guarda-os bem!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="cyberbullying bullying online assédio">
+                <div class="categoria">Exercícios de Ética</div>
+                <div class="termo-header">
+                    <div class="termo-icone">🚫</div>
+                    <div class="termo-nome">Cyberbullying</div>
+                </div>
+                <div class="termo-definicao">
+                    É usar a tecnologia para magoar, assustar ou humilhar outras pessoas de forma repetida.
+                </div>
+                <div class="exemplo">
+                    <strong>Exemplo:</strong> Cyberbullying é enviar mensagens más ou partilhar fotos embaraçosas de alguém.
+                </div>
+                <div class="dica">
+                    <strong>Dica:</strong> Se vires cyberbullying, conta a um adulto de confiança!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="pegada digital rastro online histórico">
+                <div class="categoria">Exercícios de Ética</div>
+                <div class="termo-header">
+                    <div class="termo-icone">👣</div>
+                    <div class="termo-nome">Pegada Digital</div>
+                </div>
+                <div class="termo-definicao">
+                    É o rastro que deixamos na internet através das nossas atividades online.
+                </div>
+                <div class="exemplo">
+                    <strong>Exemplo:</strong> A minha pegada digital inclui os sites que visito e as fotos que publico.
+                </div>
+                <div class="dica">
+                    <strong>Dica:</strong> Pensa sempre antes de publicar - a internet tem memória!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="propriedade intelectual autoria criação original">
+                <div class="categoria">Exercícios de Ética</div>
+                <div class="termo-header">
+                    <div class="termo-icone">🧠</div>
+                    <div class="termo-nome">Propriedade Intelectual</div>
+                </div>
+                <div class="termo-definicao">
+                    São os direitos sobre criações da mente, como invenções, textos, músicas, imagens e programas.
+                </div>
+                <div class="exemplo">
+                    <strong>Exemplo:</strong> O jogo que criei é minha propriedade intelectual - ninguém pode copiá-lo sem permissão.
+                </div>
+                <div class="dica">
+                    <strong>Dica:</strong> Respeita sempre as criações dos outros e cria as tuas próprias!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="inteligência artificial ia robot automático">
+                <div class="categoria">Exercícios de Programação</div>
+                <div class="termo-header">
+                    <div class="termo-icone">🤖</div>
+                    <div class="termo-nome">Inteligência Artificial</div>
+                </div>
+                <div class="termo-definicao">
+                    É quando os computadores conseguem fazer tarefas que normalmente precisam de inteligência humana.
+                </div>
+                <div class="exemplo">
+                    <strong>Exemplo:</strong> A inteligência artificial ajuda o computador a reconhecer a minha voz ou a jogar xadrez.
+                </div>
+                <div class="dica">
+                    <strong>Dica:</strong> A IA está em muitos lugares - assistentes de voz, jogos e aplicações!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="robótica robot automação máquina">
+                <div class="categoria">Exercícios de Programação</div>
+                <div class="termo-header">
+                    <div class="termo-icone">🦾</div>
+                    <div class="termo-nome">Robótica</div>
+                </div>
+                <div class="termo-definicao">
+                    É a ciência de criar e programar robots para fazer tarefas automaticamente.
+                </div>
+                <div class="exemplo">
+                    <strong>Exemplo:</strong> Programo um robot para se mover, evitar obstáculos e pegar em objetos.
+                </div>
+                <div class="dica">
+                    <strong>Dica:</strong> Os robots seguem as instruções que nós programamos!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="base dados informação organizada estrutura">
+                <div class="categoria">Exercícios de Programação</div>
+                <div class="termo-header">
+                    <div class="termo-icone">🗄️</div>
+                    <div class="termo-nome">Base de Dados</div>
+                </div>
+                <div class="termo-definicao">
+                    É um sistema organizado para guardar e encontrar grandes quantidades de informação.
+                </div>
+                <div class="exemplo">
+                    <strong>Exemplo:</strong> A escola tem uma base de dados com informações de todos os alunos.
+                </div>
+                <div class="dica">
+                    <strong>Dica:</strong> É como uma biblioteca gigante mas para informação digital!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="rede network conexão comunicação">
+                <div class="categoria">Exercícios de Ética</div>
+                <div class="termo-header">
+                    <div class="termo-icone">🌐</div>
+                    <div class="termo-nome">Rede</div>
+                </div>
+                <div class="termo-definicao">
+                    É um conjunto de computadores ligados entre si para partilhar informação e recursos.
+                </div>
+                <div class="exemplo">
+                    <strong>Exemplo:</strong> A internet é uma rede gigante que liga computadores do mundo inteiro.
+                </div>
+                <div class="dica">
+                    <strong>Dica:</strong> As redes permitem que os computadores "falem" uns com os outros!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="cidadania digital responsabilidade online comportamento">
+                <div class="categoria">Exercícios de Ética</div>
+                <div class="termo-header">
+                    <div class="termo-icone">🏛️</div>
+                    <div class="termo-nome">Cidadania Digital</div>
+                </div>
+                <div class="termo-definicao">
+                    É ser um cidadão responsável e respeitoso no mundo digital, seguindo regras e ajudando outros.
+                </div>
+                <div class="exemplo">
+                    <strong>Exemplo:</strong> Pratico cidadania digital quando ajudo colegas online e denuncio conteúdos inadequados.
+                </div>
+                <div class="dica">
+                    <strong>Dica:</strong> Sê o tipo de pessoa online que gostarias de encontrar!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function pesquisarTermos() {
+            const input = document.querySelector('.pesquisa-input');
+            const filtro = input.value.toLowerCase();
+            const termos = document.querySelectorAll('.termo-card');
+
+            termos.forEach(termo => {
+                const texto = termo.getAttribute('data-termo').toLowerCase();
+                const nome = termo.querySelector('.termo-nome').textContent.toLowerCase();
+                const definicao = termo.querySelector('.termo-definicao').textContent.toLowerCase();
+                
+                if (texto.includes(filtro) || nome.includes(filtro) || definicao.includes(filtro)) {
+                    termo.style.display = 'block';
+                } else {
+                    termo.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossário - 2º Ano</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a8d8ea 0%, #aa96da 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .voltar-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .voltar-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        .pesquisa {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .pesquisa input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .pesquisa input:focus {
+            border-color: #2980b9;
+        }
+
+        .termos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .termo-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid #3498db;
+        }
+
+        .termo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .termo-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .termo-emoji {
+            font-size: 2.5rem;
+        }
+
+        .termo-titulo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .termo-definicao {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .termo-exemplo {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 3px solid #3498db;
+        }
+
+        .termo-exemplo strong {
+            color: #3498db;
+        }
+
+        .termo-dica {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid #27ae60;
+        }
+
+        .termo-dica strong {
+            color: #27ae60;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .termos-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="ano2.html" class="voltar-btn">
+            ← Voltar ao 2º Ano
+        </a>
+        
+        <div class="header">
+            <h1>📖 Glossário do 2º Ano</h1>
+            <p>Palavras digitais para explorar as competências digitais</p>
+        </div>
+        
+        <div class="pesquisa">
+            <input type="text" id="pesquisaInput" placeholder="🔍 Pesquisa uma palavra..." onkeyup="pesquisarTermos()">
+        </div>
+        
+        <div class="termos-grid" id="termosGrid">
+            <div class="termo-card" data-termo="internet">
+                <div class="badge">Exercícios de Pesquisa</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🌐</div>
+                    <div class="termo-titulo">Internet</div>
+                </div>
+                <div class="termo-definicao">
+                    É como uma grande biblioteca mundial onde podemos encontrar informações, jogos e falar com pessoas.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Uso a internet para pesquisar sobre animais para o meu trabalho da escola.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> A internet liga computadores de todo o mundo!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="motor busca">
+                <div class="badge">Exercícios de Pesquisa</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🔍</div>
+                    <div class="termo-titulo">Motor de Busca</div>
+                </div>
+                <div class="termo-definicao">
+                    É uma ferramenta que nos ajuda a encontrar informações na internet, como um detetive digital.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Uso o motor de busca para encontrar imagens de dinossauros.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> É como ter um assistente que sabe onde está tudo na internet!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="pesquisar">
+                <div class="badge">Exercícios de Pesquisa</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🔎</div>
+                    <div class="termo-titulo">Pesquisar</div>
+                </div>
+                <div class="termo-definicao">
+                    É procurar informações sobre alguma coisa, como procurar um livro na biblioteca.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Vou pesquisar sobre o meu animal favorito.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Quanto melhor a pergunta, melhor a resposta!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="palavras chave">
+                <div class="badge">Exercícios de Pesquisa</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🗝️</div>
+                    <div class="termo-titulo">Palavras-chave</div>
+                </div>
+                <div class="termo-definicao">
+                    São as palavras mais importantes que escrevemos para encontrar o que queremos.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Se quero saber sobre gatos, as palavras-chave são "gatos" e "animais".
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Escolhe palavras simples e importantes!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="website">
+                <div class="badge">Exercícios de Pesquisa</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🏠</div>
+                    <div class="termo-titulo">Website</div>
+                </div>
+                <div class="termo-definicao">
+                    É como uma casa na internet onde encontramos informações, jogos ou histórias.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Visito um website sobre ciência para aprender coisas novas.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Cada website tem um endereço especial na internet!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="informacao">
+                <div class="badge">Exercícios de Pesquisa</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">📚</div>
+                    <div class="termo-titulo">Informação</div>
+                </div>
+                <div class="termo-definicao">
+                    São conhecimentos ou factos que aprendemos sobre alguma coisa.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Encontrei informação sobre como os pássaros voam.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Nem toda a informação na internet é verdadeira!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="pasta">
+                <div class="badge">Exercícios de Organização</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">📂</div>
+                    <div class="termo-titulo">Pasta</div>
+                </div>
+                <div class="termo-definicao">
+                    É como uma gaveta no computador onde guardamos ficheiros organizados.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Tenho uma pasta com todos os meus desenhos digitais.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Dá nomes claros às tuas pastas para as encontrares facilmente!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="organizar">
+                <div class="badge">Exercícios de Organização</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🗂️</div>
+                    <div class="termo-titulo">Organizar</div>
+                </div>
+                <div class="termo-definicao">
+                    É arrumar as coisas de forma ordenada para as encontrarmos facilmente.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Organizo os meus ficheiros por assuntos diferentes.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Um computador organizado é mais fácil de usar!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="guardar">
+                <div class="badge">Exercícios de Organização</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">💾</div>
+                    <div class="termo-titulo">Guardar</div>
+                </div>
+                <div class="termo-definicao">
+                    É como pôr algo num lugar seguro no computador para não se perder.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Guardo sempre o meu trabalho antes de fechar o computador.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Guarda o teu trabalho muitas vezes para não perderes nada!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="nome ficheiro">
+                <div class="badge">Exercícios de Organização</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🏷️</div>
+                    <div class="termo-titulo">Nome do Ficheiro</div>
+                </div>
+                <div class="termo-definicao">
+                    É como uma etiqueta que damos aos nossos trabalhos para os identificar.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Chamo ao meu desenho "Casa_Vermelha" para saber o que é.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Usa nomes que te ajudem a lembrar do conteúdo!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="copiar">
+                <div class="badge">Exercícios de Organização</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">📋</div>
+                    <div class="termo-titulo">Copiar</div>
+                </div>
+                <div class="termo-definicao">
+                    É fazer uma cópia igual de algo, como fotocopiar uma folha.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Copio um texto para o usar noutro trabalho.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Copiar é útil quando queres usar a mesma coisa em vários sítios!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="colar">
+                <div class="badge">Exercícios de Organização</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">📌</div>
+                    <div class="termo-titulo">Colar</div>
+                </div>
+                <div class="termo-definicao">
+                    É pôr algo que copiámos num novo lugar.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Colo uma imagem no meu trabalho sobre animais.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Primeiro copias, depois colas onde quiseres!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="apagar">
+                <div class="badge">Exercícios de Organização</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🗑️</div>
+                    <div class="termo-titulo">Apagar</div>
+                </div>
+                <div class="termo-definicao">
+                    É remover algo que não queremos mais, como deitar fora.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Apago ficheiros antigos que já não preciso.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Pensa bem antes de apagar, porque pode ser difícil recuperar!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="backup">
+                <div class="badge">Exercícios de Organização</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🔄</div>
+                    <div class="termo-titulo">Backup</div>
+                </div>
+                <div class="termo-definicao">
+                    É fazer uma cópia de segurança dos nossos ficheiros importantes.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Faço backup das minhas fotos para não as perder.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> É como ter uma cópia extra dos teus tesouros digitais!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="aplicacao">
+                <div class="badge">Exercícios de Pesquisa</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">📱</div>
+                    <div class="termo-titulo">Aplicação</div>
+                </div>
+                <div class="termo-definicao">
+                    É um programa especial que nos ajuda a fazer coisas no computador ou tablet.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Uso uma aplicação para desenhar e outra para jogar.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Cada aplicação tem uma função diferente e útil!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function pesquisarTermos() {
+            const input = document.getElementById('pesquisaInput');
+            const filter = input.value.toLowerCase();
+            const cards = document.querySelectorAll('.termo-card');
+
+            cards.forEach(card => {
+                const termo = card.getAttribute('data-termo').toLowerCase();
+                const titulo = card.querySelector('.termo-titulo').textContent.toLowerCase();
+                const definicao = card.querySelector('.termo-definicao').textContent.toLowerCase();
+                
+                if (termo.includes(filter) || titulo.includes(filter) || definicao.includes(filter)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+

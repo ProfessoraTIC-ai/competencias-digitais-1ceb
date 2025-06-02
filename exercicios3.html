@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios Interativos - 3º Ano</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .voltar-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .voltar-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #e91e63;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        .exercicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .exercicio-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid #e91e63;
+        }
+
+        .exercicio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .exercicio-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .exercicio-emoji {
+            font-size: 3rem;
+        }
+
+        .exercicio-info h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .exercicio-info p {
+            color: #7f8c8d;
+            font-size: 1rem;
+        }
+
+        .exercicio-descricao {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .exercicio-btn {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .exercicio-btn:hover {
+            background: #c2185b;
+            transform: translateY(-2px);
+        }
+
+        .badge {
+            display: inline-block;
+            background: #e91e63;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .exercicios-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="ano3.html" class="voltar-btn">
+            ← Voltar ao 3º Ano
+        </a>
+        
+        <div class="header">
+            <h1>🧠 Exercícios Interativos - 3º Ano</h1>
+            <p>Pratica colaboração e criação digital</p>
+        </div>
+        
+        <div class="exercicios-grid">
+            <div class="exercicio-card">
+                <div class="badge">Colaboração Digital</div>
+                <div class="exercicio-header">
+                    <div class="exercicio-emoji">🤝</div>
+                    <div class="exercicio-info">
+                        <h3>Exercício de Colaboração</h3>
+                        <p>Aprende a trabalhar em equipa</p>
+                    </div>
+                </div>
+                <div class="exercicio-descricao">
+                    Descobre como colaborar eficazmente em projetos digitais. Vais aprender a partilhar documentos, dar feedback construtivo e trabalhar em equipa usando ferramentas digitais.
+                </div>
+                <button class="exercicio-btn" onclick="iniciarExercicioColaboracao()">
+                    Começar Exercício
+                </button>
+            </div>
+
+            <div class="exercicio-card">
+                <div class="badge">Criação Digital</div>
+                <div class="exercicio-header">
+                    <div class="exercicio-emoji">🎨</div>
+                    <div class="exercicio-info">
+                        <h3>Exercício de Criação</h3>
+                        <p>Explora a criação digital</p>
+                    </div>
+                </div>
+                <div class="exercicio-descricao">
+                    Aprende a criar conteúdos multimédia impressionantes! Vais descobrir como combinar texto, imagens, sons e vídeos para criar projetos únicos e criativos.
+                </div>
+                <button class="exercicio-btn" onclick="iniciarExercicioCriacao()">
+                    Começar Exercício
+                </button>
+            </div>
+
+            <div class="exercicio-card">
+                <div class="badge">Comunicação Online</div>
+                <div class="exercicio-header">
+                    <div class="exercicio-emoji">💬</div>
+                    <div class="exercicio-info">
+                        <h3>Exercício de Comunicação</h3>
+                        <p>Comunica de forma eficaz</p>
+                    </div>
+                </div>
+                <div class="exercicio-descricao">
+                    Desenvolve competências avançadas de comunicação digital. Aprende a usar diferentes plataformas, a dar feedback construtivo e a participar em discussões online de forma respeitosa.
+                </div>
+                <button class="exercicio-btn" onclick="iniciarExercicioComunicacao()">
+                    Começar Exercício
+                </button>
+            </div>
+
+            <div class="exercicio-card">
+                <div class="badge">Partilha e Direitos</div>
+                <div class="exercicio-header">
+                    <div class="exercicio-emoji">⚖️</div>
+                    <div class="exercicio-info">
+                        <h3>Exercício de Direitos Digitais</h3>
+                        <p>Aprende sobre direitos de autor</p>
+                    </div>
+                </div>
+                <div class="exercicio-descricao">
+                    Descobre a importância dos direitos de autor e como partilhar conteúdos de forma responsável. Vais aprender a respeitar o trabalho dos outros e a proteger as tuas próprias criações.
+                </div>
+                <button class="exercicio-btn" onclick="iniciarExercicioDireitos()">
+                    Começar Exercício
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function iniciarExercicioColaboracao() {
+            const situacao = prompt('🤝 Exercício de Colaboração\n\nEscolhe uma situação de trabalho em equipa:\n1. Criar uma apresentação em grupo\n2. Editar um documento partilhado\n3. Organizar um projeto escolar\n\nEscreve o número (1, 2 ou 3):');
+            
+            if (situacao === '1') {
+                alert('📊 Apresentação em Grupo\n\nPassos para colaborar:\n1. Dividam os temas entre todos\n2. Usem um documento partilhado para planear\n3. Cada um faz a sua parte\n4. Revejam juntos antes de apresentar\n5. Pratiquem a apresentação em equipa\n6. Deem feedback construtivo uns aos outros\n\nDica: Usem cores e estilos consistentes!\n\nParabéns! Sabes colaborar em apresentações! 🌟');
+            } else if (situacao === '2') {
+                alert('📝 Documento Partilhado\n\nRegras de colaboração:\n1. Não apaguem o trabalho dos outros\n2. Usem comentários para dar sugestões\n3. Identifiquem as vossas contribuições\n4. Respeitem as ideias de todos\n5. Comuniquem antes de fazer grandes mudanças\n6. Guardem versões de segurança\n\nParabéns! Sabes trabalhar em documentos partilhados! 🌟');
+            } else if (situacao === '3') {
+                alert('📋 Projeto Escolar\n\nComo organizar em equipa:\n1. Façam uma reunião para planear\n2. Dividam as tarefas de forma justa\n3. Definam prazos para cada parte\n4. Usem ferramentas digitais para comunicar\n5. Façam reuniões regulares para acompanhar\n6. Ajudem-se mutuamente quando necessário\n\nParabéns! Sabes organizar projetos em equipa! 🌟');
+            } else {
+                alert('🤝 Escolhe 1, 2 ou 3 da próxima vez!\n\nLembra-te: a colaboração é fundamental no mundo digital!\n\nTenta novamente! 😊');
+            }
+        }
+
+        function iniciarExercicioCriacao() {
+            const projeto = prompt('🎨 Exercício de Criação\n\nQue tipo de projeto multimédia queres criar?\n1. Vídeo educativo\n2. Revista digital\n3. Podcast sobre um tema\n\nEscreve o número (1, 2 ou 3):');
+            
+            if (projeto === '1') {
+                alert('🎬 Vídeo Educativo\n\nPassos para criar:\n1. Escolhe um tema interessante\n2. Escreve um guião simples\n3. Grava pequenos segmentos\n4. Adiciona imagens e texto\n5. Inclui música de fundo (livre de direitos)\n6. Edita e revê o resultado\n7. Partilha com os colegas\n\nDica: Vídeos de 2-3 minutos são perfeitos!\n\nParabéns! És um criador de vídeos! 🌟');
+            } else if (projeto === '2') {
+                alert('📰 Revista Digital\n\nPassos para criar:\n1. Escolhe um tema principal\n2. Planeia 4-5 artigos diferentes\n3. Combina texto com imagens atrativas\n4. Usa cores e fontes consistentes\n5. Adiciona gráficos ou infografias\n6. Inclui uma capa chamativa\n7. Exporta em PDF para partilhar\n\nParabéns! És um editor digital! 🌟');
+            } else if (projeto === '3') {
+                alert('🎙️ Podcast Educativo\n\nPassos para criar:\n1. Escolhe um tema que dominas\n2. Escreve os pontos principais\n3. Grava em local silencioso\n4. Fala de forma clara e pausada\n5. Adiciona música de introdução\n6. Edita para remover pausas longas\n7. Partilha com família e amigos\n\nDica: Episódios de 5-10 minutos são ideais!\n\nParabéns! És um podcaster! 🌟');
+            } else {
+                alert('🎨 Escolhe 1, 2 ou 3 da próxima vez!\n\nLembra-te: podes criar vídeos, revistas ou podcasts!\n\nTenta novamente! 😊');
+            }
+        }
+
+        function iniciarExercicioComunicacao() {
+            const plataforma = prompt('💬 Exercício de Comunicação\n\nEm que plataforma queres praticar comunicação?\n1. Email formal\n2. Fórum de discussão\n3. Videoconferência\n\nEscreve o número (1, 2 ou 3):');
+            
+            if (plataforma === '1') {
+                alert('📧 Email Formal\n\nEstrutura profissional:\n1. Assunto claro e específico\n2. Saudação adequada\n3. Introdução breve\n4. Desenvolvimento do tema\n5. Conclusão ou pedido\n6. Despedida formal\n7. Assinatura com contactos\n\nExemplo: "Caro Professor, escrevo para esclarecer..."\n\nParabéns! Sabes escrever emails profissionais! 🌟');
+            } else if (plataforma === '2') {
+                alert('💭 Fórum de Discussão\n\nRegras de participação:\n1. Lê todas as mensagens antes de responder\n2. Mantém-te no tópico da discussão\n3. Sê respeitoso com opiniões diferentes\n4. Fundamenta as tuas ideias\n5. Usa linguagem clara e educada\n6. Evita escrever em MAIÚSCULAS\n7. Agradece contribuições úteis\n\nParabéns! Sabes participar em fóruns! 🌟');
+            } else if (plataforma === '3') {
+                alert('📹 Videoconferência\n\nBoas práticas:\n1. Testa áudio e vídeo antes\n2. Escolhe um fundo neutro\n3. Olha para a câmara ao falar\n4. Usa o mute quando não falas\n5. Participa ativamente\n6. Respeita o tempo de cada um\n7. Toma notas importantes\n\nParabéns! Sabes comunicar por vídeo! 🌟');
+            } else {
+                alert('💬 Escolhe 1, 2 ou 3 da próxima vez!\n\nLembra-te: cada plataforma tem as suas regras!\n\nTenta novamente! 😊');
+            }
+        }
+
+        function iniciarExercicioDireitos() {
+            const situacao = prompt('⚖️ Exercício de Direitos Digitais\n\nQue situação queres explorar?\n1. Usar imagens da internet\n2. Partilhar música\n3. Citar trabalhos de outros\n\nEscreve o número (1, 2 ou 3):');
+            
+            if (situacao === '1') {
+                alert('🖼️ Usar Imagens da Internet\n\nRegras importantes:\n1. Nem todas as imagens são livres para usar\n2. Procura imagens com licença Creative Commons\n3. Sempre indica a fonte da imagem\n4. Pede autorização quando necessário\n5. Usa sites como Unsplash ou Pixabay\n6. Cria as tuas próprias imagens quando possível\n\nLembra-te: respeitar direitos de autor é fundamental!\n\nParabéns! Sabes usar imagens legalmente! 🌟');
+            } else if (situacao === '2') {
+                alert('🎵 Partilhar Música\n\nO que deves saber:\n1. A música tem direitos de autor\n2. Não podes partilhar música protegida\n3. Usa música livre de direitos\n4. Plataformas como YouTube Audio Library são seguras\n5. Sempre credita o autor da música\n6. Para projetos escolares, pede orientação\n\nParabéns! Sabes partilhar música responsavelmente! 🌟');
+            } else if (situacao === '3') {
+                alert('📚 Citar Trabalhos de Outros\n\nComo fazer corretamente:\n1. Sempre indica a fonte original\n2. Usa aspas para citações diretas\n3. Inclui o nome do autor\n4. Menciona onde encontraste a informação\n5. Não copies textos inteiros\n6. Parafraseia com as tuas palavras\n7. Faz uma bibliografia\n\nParabéns! Sabes citar trabalhos corretamente! 🌟');
+            } else {
+                alert('⚖️ Escolhe 1, 2 ou 3 da próxima vez!\n\nLembra-te: respeitar direitos de autor é muito importante!\n\nTenta novamente! 😊');
+            }
+        }
+    </script>
+</body>
+</html>
+

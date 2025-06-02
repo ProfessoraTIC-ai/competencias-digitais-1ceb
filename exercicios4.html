@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios Interativos - 4º Ano</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .voltar-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .voltar-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        .exercicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .exercicio-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid #667eea;
+        }
+
+        .exercicio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .exercicio-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .exercicio-emoji {
+            font-size: 3rem;
+        }
+
+        .exercicio-info h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .exercicio-info p {
+            color: #7f8c8d;
+            font-size: 1rem;
+        }
+
+        .exercicio-descricao {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .exercicio-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .exercicio-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .exercicios-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="ano4.html" class="voltar-btn">
+            ← Voltar ao 4º Ano
+        </a>
+        
+        <div class="header">
+            <h1>🧠 Exercícios Interativos - 4º Ano</h1>
+            <p>Pratica programação e ética digital</p>
+        </div>
+        
+        <div class="exercicios-grid">
+            <div class="exercicio-card">
+                <div class="badge">Programação</div>
+                <div class="exercicio-header">
+                    <div class="exercicio-emoji">💻</div>
+                    <div class="exercicio-info">
+                        <h3>Exercício de Programação</h3>
+                        <p>Cria algoritmos e resolve problemas</p>
+                    </div>
+                </div>
+                <div class="exercicio-descricao">
+                    Aprende os conceitos básicos de programação através de exercícios práticos. Vais descobrir como criar algoritmos, usar variáveis e resolver problemas de forma lógica e estruturada.
+                </div>
+                <button class="exercicio-btn" onclick="iniciarExercicioProgramacao()">
+                    Começar Exercício
+                </button>
+            </div>
+
+            <div class="exercicio-card">
+                <div class="badge">Ética Digital</div>
+                <div class="exercicio-header">
+                    <div class="exercicio-emoji">⚖️</div>
+                    <div class="exercicio-info">
+                        <h3>Exercício de Ética Digital</h3>
+                        <p>Aprende sobre cidadania digital</p>
+                    </div>
+                </div>
+                <div class="exercicio-descricao">
+                    Explora questões importantes sobre comportamento online, privacidade e responsabilidade digital. Vais aprender a ser um cidadão digital responsável e ético.
+                </div>
+                <button class="exercicio-btn" onclick="iniciarExercicioEtica()">
+                    Começar Exercício
+                </button>
+            </div>
+
+            <div class="exercicio-card">
+                <div class="badge">Inteligência Artificial</div>
+                <div class="exercicio-header">
+                    <div class="exercicio-emoji">🤖</div>
+                    <div class="exercicio-info">
+                        <h3>Exercício de IA</h3>
+                        <p>Descobre o mundo da IA</p>
+                    </div>
+                </div>
+                <div class="exercicio-descricao">
+                    Aprende sobre inteligência artificial de forma simples e divertida. Vais descobrir como a IA funciona, onde é usada e como pode ajudar a resolver problemas do dia a dia.
+                </div>
+                <button class="exercicio-btn" onclick="iniciarExercicioIA()">
+                    Começar Exercício
+                </button>
+            </div>
+
+            <div class="exercicio-card">
+                <div class="badge">Robótica</div>
+                <div class="exercicio-header">
+                    <div class="exercicio-emoji">🤖</div>
+                    <div class="exercicio-info">
+                        <h3>Exercício de Robótica</h3>
+                        <p>Programa robots virtuais</p>
+                    </div>
+                </div>
+                <div class="exercicio-descricao">
+                    Descobre o fascinante mundo da robótica! Vais aprender como programar robots virtuais, dar-lhes instruções e fazer com que executem tarefas específicas.
+                </div>
+                <button class="exercicio-btn" onclick="iniciarExercicioRobotica()">
+                    Começar Exercício
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function iniciarExercicioProgramacao() {
+            const desafio = prompt('💻 Exercício de Programação\n\nEscolhe um desafio de programação:\n1. Criar um algoritmo para fazer um bolo\n2. Programar um semáforo\n3. Criar um jogo simples\n\nEscreve o número (1, 2 ou 3):');
+            
+            if (desafio === '1') {
+                alert('🍰 Algoritmo para Fazer um Bolo\n\nVamos criar o algoritmo:\n\n1. INÍCIO\n2. Reunir ingredientes (farinha, ovos, açúcar, manteiga)\n3. Pré-aquecer forno a 180°C\n4. Misturar ingredientes secos\n5. Adicionar ingredientes líquidos\n6. Mexer até ficar homogéneo\n7. Colocar na forma\n8. Levar ao forno por 30 minutos\n9. Verificar se está cozido\n10. SE não estiver cozido, ENTÃO voltar ao passo 8\n11. Retirar do forno\n12. FIM\n\nParabéns! Criaste o teu primeiro algoritmo! 🌟');
+            } else if (desafio === '2') {
+                alert('🚦 Programar um Semáforo\n\nAlgoritmo do semáforo:\n\n1. INÍCIO\n2. Acender luz VERDE por 30 segundos\n3. Acender luz AMARELA por 5 segundos\n4. Acender luz VERMELHA por 25 segundos\n5. REPETIR desde o passo 2\n\nVariáveis necessárias:\n- tempo_verde = 30\n- tempo_amarelo = 5\n- tempo_vermelho = 25\n- cor_atual = "verde"\n\nParabéns! Programaste um semáforo! 🌟');
+            } else if (desafio === '3') {
+                alert('🎮 Jogo Simples - Adivinhar Número\n\nAlgoritmo do jogo:\n\n1. INÍCIO\n2. Computador escolhe número entre 1 e 10\n3. Pedir ao jogador para adivinhar\n4. LER tentativa do jogador\n5. SE tentativa = número secreto\n   ENTÃO mostrar "Parabéns!"\n   SENÃO mostrar "Tenta novamente"\n6. SE não acertou, ENTÃO voltar ao passo 3\n7. FIM\n\nParabéns! Criaste um jogo! 🌟');
+            } else {
+                alert('💻 Escolhe 1, 2 ou 3 da próxima vez!\n\nLembra-te: programar é como dar instruções muito precisas!\n\nTenta novamente! 😊');
+            }
+        }
+
+        function iniciarExercicioEtica() {
+            const situacao = prompt('⚖️ Exercício de Ética Digital\n\nQue situação ética queres explorar?\n1. Partilhar fotos de amigos\n2. Usar IA para fazer trabalhos\n3. Cyberbullying\n\nEscreve o número (1, 2 ou 3):');
+            
+            if (situacao === '1') {
+                alert('📸 Partilhar Fotos de Amigos\n\nRegras éticas importantes:\n\n1. SEMPRE pede autorização antes de partilhar\n2. Respeita se alguém disser "não"\n3. Não partilhes fotos embaraçosas\n4. Pensa: "Como me sentiria se fosse comigo?"\n5. Lembra-te: uma vez na internet, fica para sempre\n6. Protege a privacidade dos teus amigos\n\nPrincípio: Trata os outros como gostarias de ser tratado!\n\nParabéns! Sabes partilhar de forma ética! 🌟');
+            } else if (situacao === '2') {
+                alert('🤖 Usar IA para Fazer Trabalhos\n\nComo usar IA de forma ética:\n\n1. Usa IA para te AJUDAR, não para fazer tudo\n2. Sempre indica quando usaste IA\n3. Verifica se a informação está correta\n4. Aprende com o processo\n5. Não copies diretamente\n6. Pergunta ao professor se podes usar\n7. Desenvolve as tuas próprias ideias\n\nLembra-te: o objetivo é aprender!\n\nParabéns! Sabes usar IA responsavelmente! 🌟');
+            } else if (situacao === '3') {
+                alert('🛡️ Cyberbullying\n\nComo prevenir e agir:\n\n1. NUNCA participes em cyberbullying\n2. Se vires, não ignores - ajuda\n3. Reporta comportamentos inadequados\n4. Apoia quem está a ser vítima\n5. Fala com um adulto de confiança\n6. Guarda evidências se necessário\n7. Lembra-te: há uma pessoa real do outro lado\n\nSê parte da solução, não do problema!\n\nParabéns! Sabes combater o cyberbullying! 🌟');
+            } else {
+                alert('⚖️ Escolhe 1, 2 ou 3 da próxima vez!\n\nLembra-te: a ética digital é fundamental!\n\nTenta novamente! 😊');
+            }
+        }
+
+        function iniciarExercicioIA() {
+            const topico = prompt('🤖 Exercício de Inteligência Artificial\n\nQue aspeto da IA queres explorar?\n1. Como a IA aprende\n2. IA no dia a dia\n3. Criar um chatbot simples\n\nEscreve o número (1, 2 ou 3):');
+            
+            if (topico === '1') {
+                alert('🧠 Como a IA Aprende\n\nProcesso de aprendizagem da IA:\n\n1. DADOS: A IA precisa de muitos exemplos\n2. PADRÕES: Procura semelhanças nos dados\n3. TREINO: Pratica com milhares de exemplos\n4. TESTE: Verifica se aprendeu corretamente\n5. MELHORIA: Ajusta quando erra\n6. APLICAÇÃO: Usa o que aprendeu em situações novas\n\nExemplo: Para reconhecer gatos, a IA vê milhares de fotos de gatos!\n\nParabéns! Entendes como a IA aprende! 🌟');
+            } else if (topico === '2') {
+                alert('🏠 IA no Dia a Dia\n\nOnde encontras IA:\n\n1. ASSISTENTES: Siri, Alexa, Google Assistant\n2. RECOMENDAÇÕES: YouTube, Netflix sugerem vídeos\n3. TRADUÇÃO: Google Translate\n4. FOTOS: Reconhecimento de faces\n5. JOGOS: Adversários inteligentes\n6. CARROS: Sistemas de navegação\n7. MEDICINA: Ajuda médicos no diagnóstico\n\nA IA está em todo o lado para nos ajudar!\n\nParabéns! Reconheces IA no quotidiano! 🌟');
+            } else if (topico === '3') {
+                alert('💬 Criar um Chatbot Simples\n\nEstrutura básica de um chatbot:\n\n1. SAUDAÇÃO: "Olá! Como posso ajudar?"\n2. RECONHECER PALAVRAS-CHAVE:\n   - SE contém "tempo" → mostrar previsão\n   - SE contém "ajuda" → mostrar menu\n   - SE contém "tchau" → despedir-se\n3. RESPOSTA PADRÃO: "Não entendi, podes repetir?"\n4. APRENDIZAGEM: Guardar novas perguntas\n\nExemplo: Utilizador diz "Que tempo faz?" → Bot responde com previsão\n\nParabéns! Sabes como criar um chatbot! 🌟');
+            } else {
+                alert('🤖 Escolhe 1, 2 ou 3 da próxima vez!\n\nLembra-te: a IA é uma ferramenta poderosa para ajudar!\n\nTenta novamente! 😊');
+            }
+        }
+
+        function iniciarExercicioRobotica() {
+            const missao = prompt('🤖 Exercício de Robótica\n\nQue missão queres programar para o robot?\n1. Limpar uma sala\n2. Entregar uma encomenda\n3. Cuidar de plantas\n\nEscreve o número (1, 2 ou 3):');
+            
+            if (missao === '1') {
+                alert('🧹 Robot Limpeza\n\nAlgoritmo para limpar sala:\n\n1. INÍCIO\n2. Mapear a sala (usar sensores)\n3. Identificar obstáculos\n4. Planear rota de limpeza\n5. ENQUANTO há área por limpar:\n   a) Mover para próxima área\n   b) Aspirar/limpar\n   c) Verificar se está limpo\n   d) Marcar área como concluída\n6. Regressar à base de carregamento\n7. FIM\n\nSensores necessários: câmara, proximidade, sujidade\n\nParabéns! Programaste um robot de limpeza! 🌟');
+            } else if (missao === '2') {
+                alert('📦 Robot Entregador\n\nAlgoritmo para entregar encomenda:\n\n1. INÍCIO\n2. Receber coordenadas do destino\n3. Calcular melhor rota\n4. Verificar se encomenda está segura\n5. ENQUANTO não chegou ao destino:\n   a) Mover na direção correta\n   b) Evitar obstáculos\n   c) Verificar posição atual\n6. Chegou ao destino:\n   a) Confirmar identidade do recetor\n   b) Entregar encomenda\n   c) Confirmar entrega\n7. Regressar à base\n8. FIM\n\nParabéns! Programaste um robot entregador! 🌟');
+            } else if (missao === '3') {
+                alert('🌱 Robot Jardineiro\n\nAlgoritmo para cuidar de plantas:\n\n1. INÍCIO\n2. PARA cada planta:\n   a) Verificar humidade do solo\n   b) SE solo seco ENTÃO regar\n   c) Medir luz solar\n   d) SE pouca luz ENTÃO mover planta\n   e) Verificar pragas\n   f) SE há pragas ENTÃO alertar humano\n   g) Registar dados da planta\n3. Gerar relatório diário\n4. Programar próxima verificação\n5. FIM\n\nSensores: humidade, luz, câmara, temperatura\n\nParabéns! Programaste um robot jardineiro! 🌟');
+            } else {
+                alert('🤖 Escolhe 1, 2 ou 3 da próxima vez!\n\nLembra-te: robots seguem instruções muito precisas!\n\nTenta novamente! 😊');
+            }
+        }
+    </script>
+</body>
+</html>
+

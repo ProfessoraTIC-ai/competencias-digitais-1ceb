@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios Interativos - 2º Ano</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a8d8ea 0%, #aa96da 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .voltar-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .voltar-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        .exercicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+        }
+
+        .exercicio-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .exercicio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .badge {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .exercicio-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .exercicio-emoji {
+            font-size: 3rem;
+        }
+
+        .exercicio-titulo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .exercicio-subtitulo {
+            font-size: 1rem;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+
+        .exercicio-descricao {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .comecar-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .comecar-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .exercicios-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="ano2.html" class="voltar-btn">
+            ← Voltar ao 2º Ano
+        </a>
+        
+        <div class="header">
+            <h1>🧠 Exercícios Interativos - 2º Ano</h1>
+            <p>Pratica as competências digitais de forma divertida</p>
+        </div>
+        
+        <div class="exercicios-grid">
+            <div class="exercicio-card">
+                <div class="badge">Exercícios de Pesquisa</div>
+                <div class="exercicio-header">
+                    <div class="exercicio-emoji">🔍</div>
+                    <div>
+                        <div class="exercicio-titulo">Exercício de Pesquisa</div>
+                        <div class="exercicio-subtitulo">Aprende a pesquisar na internet</div>
+                    </div>
+                </div>
+                <div class="exercicio-descricao">
+                    Neste exercício vais aprender a usar motores de busca para encontrar informações sobre os teus temas favoritos. Vais descobrir como escolher as melhores palavras-chave e avaliar se a informação é fiável.
+                </div>
+                <button class="comecar-btn" onclick="iniciarExercicioPesquisa()">Começar Exercício</button>
+            </div>
+
+            <div class="exercicio-card">
+                <div class="badge">Exercícios de Organização</div>
+                <div class="exercicio-header">
+                    <div class="exercicio-emoji">🗂️</div>
+                    <div>
+                        <div class="exercicio-titulo">Exercício de Organização</div>
+                        <div class="exercicio-subtitulo">Organiza os teus ficheiros digitais</div>
+                    </div>
+                </div>
+                <div class="exercicio-descricao">
+                    Aprende a criar pastas, dar nomes aos ficheiros e organizar o teu trabalho no computador. Vais descobrir como guardar e encontrar facilmente os teus documentos, imagens e projetos.
+                </div>
+                <button class="comecar-btn" onclick="iniciarExercicioOrganizacao()">Começar Exercício</button>
+            </div>
+
+            <div class="exercicio-card">
+                <div class="badge">Segurança Digital</div>
+                <div class="exercicio-header">
+                    <div class="exercicio-emoji">🛡️</div>
+                    <div>
+                        <div class="exercicio-titulo">Exercício de Segurança</div>
+                        <div class="exercicio-subtitulo">Uso seguro de dispositivos</div>
+                    </div>
+                </div>
+                <div class="exercicio-descricao">
+                    Aprende regras avançadas de segurança digital. Vais descobrir como proteger os teus dados, reconhecer sites seguros e criar passwords ainda mais fortes.
+                </div>
+                <button class="comecar-btn" onclick="iniciarExercicioSeguranca()">Começar Exercício</button>
+            </div>
+
+            <div class="exercicio-card">
+                <div class="badge">Comunicação Digital</div>
+                <div class="exercicio-header">
+                    <div class="exercicio-emoji">💬</div>
+                    <div>
+                        <div class="exercicio-titulo">Exercício de Comunicação</div>
+                        <div class="exercicio-subtitulo">Netiqueta e colaboração</div>
+                    </div>
+                </div>
+                <div class="exercicio-descricao">
+                    Descobre como comunicar de forma respeitosa e eficaz online. Vais aprender sobre netiqueta, como colaborar em projetos digitais e partilhar ideias de forma construtiva.
+                </div>
+                <button class="comecar-btn" onclick="iniciarExercicioComunicacao()">Começar Exercício</button>
+            </div>
+
+            <div class="exercicio-card">
+                <div class="badge">Criação Digital</div>
+                <div class="exercicio-header">
+                    <div class="exercicio-emoji">🎨</div>
+                    <div>
+                        <div class="exercicio-titulo">Exercício de Criação</div>
+                        <div class="exercicio-subtitulo">Atividades de criação de conteúdos</div>
+                    </div>
+                </div>
+                <div class="exercicio-descricao">
+                    Cria os teus próprios conteúdos digitais! Aprende a fazer apresentações mais avançadas, editar imagens simples e criar documentos com texto e imagens.
+                </div>
+                <button class="comecar-btn" onclick="iniciarExercicioCriacao()">Começar Exercício</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function iniciarExercicioPesquisa() {
+            alert('🔍 Exercício de Pesquisa\n\nVamos aprender a pesquisar!\n\n1. Escolhe um animal que gostes\n2. Pensa em 2-3 palavras-chave sobre esse animal\n3. Imagina que estás a pesquisar informações sobre ele\n4. Que perguntas farias?\n\nExemplo: Se escolheres "golfinho", as palavras-chave podem ser: "golfinho", "mamífero", "oceano".\n\nBom trabalho! Continua a praticar!');
+        }
+
+        function iniciarExercicioOrganizacao() {
+            alert('🗂️ Exercício de Organização\n\nVamos organizar ficheiros!\n\n1. Imagina que tens fotos, desenhos e trabalhos da escola\n2. Cria 3 pastas mentais: "Fotos", "Desenhos", "Escola"\n3. Pensa em nomes claros para cada ficheiro\n4. Lembra-te de guardar sempre o teu trabalho!\n\nDica: Usa nomes como "Desenho_Casa_Azul" em vez de "Desenho1".\n\nParabéns! Agora sabes organizar melhor!');
+        }
+
+        function iniciarExercicioSeguranca() {
+            const password = prompt('🛡️ Exercício de Segurança\n\nVamos criar uma password segura!\n\nEscreve uma password que tenha:\n- Pelo menos 6 caracteres\n- Números e letras\n- Que só tu saibas\n\nExemplo: MinhaIdade8');
+            
+            if (password && password.length >= 6) {
+                alert(`Excelente! 🛡️\n\nA tua password "${password}" parece segura!\n\nRegras importantes:\n1. Nunca partilhes a tua password\n2. Usa passwords diferentes para coisas diferentes\n3. Inclui números e letras\n4. Não uses o teu nome ou data de nascimento\n5. Pede ajuda a um adulto se precisares\n\nParabéns! Agora sabes criar passwords seguras! 🌟`);
+            } else {
+                alert('🛡️ Tenta novamente!\n\nLembra-te: a password deve ter pelo menos 6 caracteres e incluir números e letras.\n\nExemplo: MeuGato3 ou Escola2024\n\nA segurança é muito importante! 😊');
+            }
+        }
+
+        function iniciarExercicioComunicacao() {
+            const situacao = prompt('💬 Exercício de Comunicação\n\nEscolhe uma situação:\n1. Enviar email ao professor\n2. Comentar no trabalho de um colega\n3. Pedir ajuda num fórum\n\nEscreve o número (1, 2 ou 3):');
+            
+            if (situacao === '1') {
+                alert('📧 Email ao Professor\n\nRegras de netiqueta:\n1. Usa um assunto claro: "Dúvida sobre o trabalho de matemática"\n2. Começa com "Caro Professor"\n3. Explica a tua dúvida de forma clara\n4. Termina com "Obrigado" e o teu nome\n5. Relê antes de enviar\n\nParabéns! Sabes comunicar profissionalmente! 🌟');
+            } else if (situacao === '2') {
+                alert('👥 Comentar trabalho de colega\n\nRegras importantes:\n1. Sê sempre positivo e construtivo\n2. Diz algo que gostas primeiro\n3. Se deres sugestões, sê gentil\n4. Usa palavras como "Talvez possas..." ou "Que tal se..."\n5. Termina com algo encorajador\n\nParabéns! Sabes dar feedback positivo! 🌟');
+            } else if (situacao === '3') {
+                alert('🆘 Pedir ajuda num fórum\n\nComo pedir ajuda:\n1. Explica claramente o teu problema\n2. Diz o que já tentaste fazer\n3. Sê educado: "Por favor" e "Obrigado"\n4. Dá informações suficientes\n5. Agradece quando te ajudarem\n\nParabéns! Sabes pedir ajuda online! 🌟');
+            } else {
+                alert('💬 Escolhe 1, 2 ou 3 da próxima vez!\n\nLembra-te: a comunicação digital deve ser sempre respeitosa e clara!\n\nTenta novamente! 😊');
+            }
+        }
+
+        function iniciarExercicioCriacao() {
+            const projeto = prompt('🎨 Exercício de Criação\n\nQue projeto queres criar?\n1. Apresentação sobre animais\n2. Cartaz digital sobre o ambiente\n3. História ilustrada\n\nEscreve o número (1, 2 ou 3):');
+            
+            if (projeto === '1') {
+                alert('🐾 Apresentação sobre Animais\n\nPassos para criar:\n1. Escolhe 3 animais diferentes\n2. Pesquisa informações sobre cada um\n3. Cria 1 slide por animal\n4. Adiciona imagens bonitas\n5. Inclui factos interessantes\n6. Pratica a apresentação\n\nDica: Usa cores que combinem com cada animal!\n\nParabéns! És um criador digital! 🌟');
+            } else if (projeto === '2') {
+                alert('🌍 Cartaz Digital sobre Ambiente\n\nPassos para criar:\n1. Escolhe um tema (reciclagem, poupança de água, etc.)\n2. Pensa numa mensagem importante\n3. Usa cores da natureza (verde, azul, castanho)\n4. Adiciona imagens relacionadas\n5. Escreve frases curtas e claras\n6. Partilha com os teus colegas\n\nParabéns! Ajudas a proteger o planeta! 🌟');
+            } else if (projeto === '3') {
+                alert('📚 História Ilustrada\n\nPassos para criar:\n1. Inventa uma história divertida\n2. Divide em 4-5 partes\n3. Escreve cada parte numa página\n4. Adiciona desenhos ou imagens\n5. Usa cores alegres\n6. Lê a história aos teus amigos\n\nDica: As melhores histórias têm início, meio e fim!\n\nParabéns! És um escritor digital! 🌟');
+            } else {
+                alert('🎨 Escolhe 1, 2 ou 3 da próxima vez!\n\nLembra-te: podes criar apresentações, cartazes ou histórias no computador!\n\nTenta novamente! 😊');
+            }
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação Formativa - 1º Ano</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .voltar-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .voltar-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .pergunta {
+            display: none;
+            text-align: center;
+        }
+
+        .pergunta.ativa {
+            display: block;
+        }
+
+        .pergunta h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .pergunta-emoji {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .opcoes {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .opcao {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .opcao:hover {
+            background: #e8f5e8;
+            border-color: #27ae60;
+        }
+
+        .opcao.selecionada {
+            background: #d4edda;
+            border-color: #27ae60;
+            color: #155724;
+        }
+
+        .botoes {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-proximo {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-proximo:hover {
+            background: #229954;
+        }
+
+        .btn-anterior {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-anterior:hover {
+            background: #5a6268;
+        }
+
+        .progresso {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progresso-barra {
+            background: #27ae60;
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .resultado {
+            display: none;
+            text-align: center;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .resultado.mostrar {
+            display: block;
+        }
+
+        .resultado h2 {
+            font-size: 2rem;
+            color: #27ae60;
+            margin-bottom: 20px;
+        }
+
+        .pontuacao {
+            font-size: 3rem;
+            color: #f39c12;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .botoes {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="ano1.html" class="voltar-btn">
+            ← Voltar ao 1º Ano
+        </a>
+        
+        <div class="header">
+            <h1>✅ Avaliação Formativa - 1º Ano</h1>
+            <p>Testa os teus conhecimentos sobre competências digitais</p>
+        </div>
+        
+        <div class="progresso">
+            <div class="progresso-barra" id="progressoBarra"></div>
+        </div>
+        
+        <div class="quiz-container">
+            <div class="pergunta ativa" data-pergunta="1">
+                <div class="pergunta-emoji">💻</div>
+                <h3>O que é um computador?</h3>
+                <div class="opcoes">
+                    <div class="opcao" onclick="selecionarOpcao(this, false)">Um brinquedo para jogar</div>
+                    <div class="opcao" onclick="selecionarOpcao(this, true)">Uma máquina que nos ajuda a fazer muitas coisas</div>
+                    <div class="opcao" onclick="selecionarOpcao(this, false)">Uma televisão grande</div>
+                </div>
+            </div>
+
+            <div class="pergunta" data-pergunta="2">
+                <div class="pergunta-emoji">🔐</div>
+                <h3>O que é uma password?</h3>
+                <div class="opcoes">
+                    <div class="opcao" onclick="selecionarOpcao(this, false)">Uma palavra qualquer</div>
+                    <div class="opcao" onclick="selecionarOpcao(this, true)">Uma palavra secreta que só nós sabemos</div>
+                    <div class="opcao" onclick="selecionarOpcao(this, false)">O nome do computador</div>
+                </div>
+            </div>
+
+            <div class="pergunta" data-pergunta="3">
+                <div class="pergunta-emoji">🖱️</div>
+                <h3>Para que serve o rato do computador?</h3>
+                <div class="opcoes">
+                    <div class="opcao" onclick="selecionarOpcao(this, false)">Para fazer barulho</div>
+                    <div class="opcao" onclick="selecionarOpcao(this, true)">Para mexer uma setinha no ecrã</div>
+                    <div class="opcao" onclick="selecionarOpcao(this, false)">Para ligar o computador</div>
+                </div>
+            </div>
+
+            <div class="pergunta" data-pergunta="4">
+                <div class="pergunta-emoji">🌐</div>
+                <h3>O que devemos fazer na internet?</h3>
+                <div class="opcoes">
+                    <div class="opcao" onclick="selecionarOpcao(this, false)">Falar com qualquer pessoa</div>
+                    <div class="opcao" onclick="selecionarOpcao(this, true)">Pedir sempre ajuda aos adultos</div>
+                    <div class="opcao" onclick="selecionarOpcao(this, false)">Dar a nossa morada a estranhos</div>
+                </div>
+            </div>
+
+            <div class="pergunta" data-pergunta="5">
+                <div class="pergunta-emoji">💌</div>
+                <h3>Como devemos ser nas nossas mensagens digitais?</h3>
+                <div class="opcoes">
+                    <div class="opcao" onclick="selecionarOpcao(this, false)">Mal-educados</div>
+                    <div class="opcao" onclick="selecionarOpcao(this, true)">Simpáticos e respeitosos</div>
+                    <div class="opcao" onclick="selecionarOpcao(this, false)">Zangados</div>
+                </div>
+            </div>
+
+            <div class="botoes">
+                <button class="btn btn-anterior" onclick="perguntaAnterior()" id="btnAnterior" style="display: none;">
+                    Anterior
+                </button>
+                <button class="btn btn-proximo" onclick="proximaPergunta()" id="btnProximo">
+                    Próxima
+                </button>
+            </div>
+        </div>
+
+        <div class="resultado" id="resultado">
+            <h2>🎉 Parabéns!</h2>
+            <div class="pontuacao" id="pontuacaoFinal"></div>
+            <p id="mensagemFinal"></p>
+            <button class="btn btn-proximo" onclick="reiniciarQuiz()" style="margin-top: 20px;">
+                Fazer Novamente
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let perguntaAtual = 1;
+        let pontuacao = 0;
+        let respostas = {};
+        const totalPerguntas = 5;
+
+        function atualizarProgresso() {
+            const progresso = (perguntaAtual / totalPerguntas) * 100;
+            document.getElementById('progressoBarra').style.width = progresso + '%';
+        }
+
+        function selecionarOpcao(elemento, correta) {
+            // Remove seleção anterior
+            const opcoes = elemento.parentNode.querySelectorAll('.opcao');
+            opcoes.forEach(opcao => opcao.classList.remove('selecionada'));
+            
+            // Adiciona seleção atual
+            elemento.classList.add('selecionada');
+            
+            // Guarda resposta
+            respostas[perguntaAtual] = correta;
+        }
+
+        function proximaPergunta() {
+            if (!respostas[perguntaAtual]) {
+                alert('Por favor, seleciona uma resposta!');
+                return;
+            }
+
+            if (respostas[perguntaAtual]) {
+                pontuacao++;
+            }
+
+            if (perguntaAtual < totalPerguntas) {
+                // Esconde pergunta atual
+                document.querySelector(`[data-pergunta="${perguntaAtual}"]`).classList.remove('ativa');
+                
+                perguntaAtual++;
+                
+                // Mostra próxima pergunta
+                document.querySelector(`[data-pergunta="${perguntaAtual}"]`).classList.add('ativa');
+                
+                // Atualiza botões
+                document.getElementById('btnAnterior').style.display = 'block';
+                
+                if (perguntaAtual === totalPerguntas) {
+                    document.getElementById('btnProximo').textContent = 'Finalizar';
+                }
+                
+                atualizarProgresso();
+            } else {
+                mostrarResultado();
+            }
+        }
+
+        function perguntaAnterior() {
+            if (perguntaAtual > 1) {
+                // Esconde pergunta atual
+                document.querySelector(`[data-pergunta="${perguntaAtual}"]`).classList.remove('ativa');
+                
+                perguntaAtual--;
+                
+                // Mostra pergunta anterior
+                document.querySelector(`[data-pergunta="${perguntaAtual}"]`).classList.add('ativa');
+                
+                // Atualiza botões
+                if (perguntaAtual === 1) {
+                    document.getElementById('btnAnterior').style.display = 'none';
+                }
+                
+                document.getElementById('btnProximo').textContent = 'Próxima';
+                
+                atualizarProgresso();
+            }
+        }
+
+        function mostrarResultado() {
+            document.querySelector('.quiz-container').style.display = 'none';
+            document.getElementById('resultado').classList.add('mostrar');
+            
+            const percentagem = Math.round((pontuacao / totalPerguntas) * 100);
+            document.getElementById('pontuacaoFinal').textContent = `${pontuacao}/${totalPerguntas} (${percentagem}%)`;
+            
+            let mensagem = '';
+            if (percentagem >= 80) {
+                mensagem = '🌟 Excelente! És um expert em competências digitais!';
+            } else if (percentagem >= 60) {
+                mensagem = '👍 Muito bem! Continua a aprender!';
+            } else {
+                mensagem = '💪 Bom trabalho! Pratica mais um pouco!';
+            }
+            
+            document.getElementById('mensagemFinal').textContent = mensagem;
+        }
+
+        function reiniciarQuiz() {
+            perguntaAtual = 1;
+            pontuacao = 0;
+            respostas = {};
+            
+            // Reset interface
+            document.querySelectorAll('.pergunta').forEach(p => p.classList.remove('ativa'));
+            document.querySelector('[data-pergunta="1"]').classList.add('ativa');
+            document.querySelectorAll('.opcao').forEach(o => o.classList.remove('selecionada'));
+            
+            document.querySelector('.quiz-container').style.display = 'block';
+            document.getElementById('resultado').classList.remove('mostrar');
+            
+            document.getElementById('btnAnterior').style.display = 'none';
+            document.getElementById('btnProximo').textContent = 'Próxima';
+            
+            atualizarProgresso();
+        }
+
+        // Inicializar
+        atualizarProgresso();
+    </script>
+</body>
+</html>
+

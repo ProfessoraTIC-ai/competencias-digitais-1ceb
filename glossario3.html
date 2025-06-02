@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossário - 3º Ano</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .voltar-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .voltar-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #9b59b6;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        .pesquisa {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .pesquisa input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #9b59b6;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .pesquisa input:focus {
+            border-color: #8e44ad;
+        }
+
+        .termos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .termo-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid #9b59b6;
+        }
+
+        .termo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .termo-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .termo-emoji {
+            font-size: 2.5rem;
+        }
+
+        .termo-titulo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .termo-definicao {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .termo-exemplo {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 3px solid #9b59b6;
+        }
+
+        .termo-exemplo strong {
+            color: #9b59b6;
+        }
+
+        .termo-dica {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid #27ae60;
+        }
+
+        .termo-dica strong {
+            color: #27ae60;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #9b59b6;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .termos-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="ano3.html" class="voltar-btn">
+            ← Voltar ao 3º Ano
+        </a>
+        
+        <div class="header">
+            <h1>📖 Glossário do 3º Ano</h1>
+            <p>Palavras digitais para desenvolver autonomia digital</p>
+        </div>
+        
+        <div class="pesquisa">
+            <input type="text" id="pesquisaInput" placeholder="🔍 Pesquisa uma palavra..." onkeyup="pesquisarTermos()">
+        </div>
+        
+        <div class="termos-grid" id="termosGrid">
+            <div class="termo-card" data-termo="colaboracao">
+                <div class="badge">Exercícios de Colaboração</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🤝</div>
+                    <div class="termo-titulo">Colaboração</div>
+                </div>
+                <div class="termo-definicao">
+                    É trabalhar em conjunto com outras pessoas para alcançar um objetivo comum, partilhando ideias e tarefas.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Colaboro com os meus colegas para fazer um projeto sobre animais, onde cada um pesquisa um animal diferente.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Colaborar significa ouvir os outros e partilhar as tuas ideias!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="partilhar">
+                <div class="badge">Exercícios de Colaboração</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">📤</div>
+                    <div class="termo-titulo">Partilhar</div>
+                </div>
+                <div class="termo-definicao">
+                    É dar ou mostrar algo aos outros, como ficheiros, ideias ou conhecimentos.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Partilho as minhas fotos das férias com a família através do computador.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Partilhar ajuda todos a aprender mais!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="trabalho equipa">
+                <div class="badge">Exercícios de Colaboração</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">👥</div>
+                    <div class="termo-titulo">Trabalho em Equipa</div>
+                </div>
+                <div class="termo-definicao">
+                    É quando várias pessoas trabalham juntas, cada uma com uma função, para completar uma tarefa.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Na nossa equipa, eu faço os desenhos, o João escreve os textos e a Maria organiza tudo.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Cada pessoa tem talentos únicos que ajudam a equipa!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="comunicacao online">
+                <div class="badge">Exercícios de Colaboração</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">💬</div>
+                    <div class="termo-titulo">Comunicação Online</div>
+                </div>
+                <div class="termo-definicao">
+                    É falar ou trocar mensagens com outras pessoas através da internet.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Uso a comunicação online para falar com os meus avós que vivem longe.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Sê sempre respeitoso quando comunicas online!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="documento partilhado">
+                <div class="badge">Exercícios de Colaboração</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">📄</div>
+                    <div class="termo-titulo">Documento Partilhado</div>
+                </div>
+                <div class="termo-definicao">
+                    É um ficheiro que várias pessoas podem ver e editar ao mesmo tempo.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Criamos um documento partilhado onde todos escrevem as suas partes do trabalho.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> É como ter um caderno que todos podem escrever!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="criacao digital">
+                <div class="badge">Exercícios de Criação</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🎨</div>
+                    <div class="termo-titulo">Criação Digital</div>
+                </div>
+                <div class="termo-definicao">
+                    É fazer coisas novas usando o computador, como desenhos, histórias, vídeos ou apresentações.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Faço criação digital quando desenho no computador ou crio uma apresentação sobre dinossauros.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> A tua criatividade não tem limites no mundo digital!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="multimedia">
+                <div class="badge">Exercícios de Criação</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🎬</div>
+                    <div class="termo-titulo">Multimédia</div>
+                </div>
+                <div class="termo-definicao">
+                    É quando juntamos diferentes tipos de conteúdo como texto, imagens, sons e vídeos.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Crio um projeto multimédia sobre o espaço com fotos, texto e sons de foguetões.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Multimédia torna os projetos mais interessantes e divertidos!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="apresentacao">
+                <div class="badge">Exercícios de Criação</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">📊</div>
+                    <div class="termo-titulo">Apresentação</div>
+                </div>
+                <div class="termo-definicao">
+                    É uma forma de mostrar informações usando slides com texto, imagens e outros elementos.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Faço uma apresentação sobre o meu animal favorito para mostrar à turma.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Usa imagens e pouco texto para uma boa apresentação!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="edicao">
+                <div class="badge">Exercícios de Criação</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">✂️</div>
+                    <div class="termo-titulo">Edição</div>
+                </div>
+                <div class="termo-definicao">
+                    É modificar, melhorar ou corrigir um trabalho digital, como texto, imagens ou vídeos.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Faço edição das minhas fotos para ficarem mais bonitas e brilhantes.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> A edição ajuda a melhorar os teus trabalhos!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="formato ficheiro">
+                <div class="badge">Exercícios de Criação</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">📋</div>
+                    <div class="termo-titulo">Formato de Ficheiro</div>
+                </div>
+                <div class="termo-definicao">
+                    É o tipo de ficheiro, que determina como a informação é guardada e que programas podem abri-lo.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> As minhas fotos estão em formato JPG e os meus textos em formato DOC.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Diferentes formatos servem para diferentes tipos de conteúdo!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="nuvem">
+                <div class="badge">Exercícios de Colaboração</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">☁️</div>
+                    <div class="termo-titulo">Nuvem</div>
+                </div>
+                <div class="termo-definicao">
+                    É um espaço na internet onde podemos guardar ficheiros e aceder a eles de qualquer computador.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Guardo os meus trabalhos na nuvem para poder aceder em casa e na escola.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> A nuvem é como ter uma mochila digital sempre contigo!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="sincronizacao">
+                <div class="badge">Exercícios de Colaboração</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">🔄</div>
+                    <div class="termo-titulo">Sincronização</div>
+                </div>
+                <div class="termo-definicao">
+                    É quando os ficheiros ficam iguais em diferentes dispositivos, atualizando automaticamente.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Quando edito um documento no tablet, a sincronização faz com que apareça igual no computador.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> A sincronização mantém tudo atualizado em todos os teus dispositivos!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="direitos autor">
+                <div class="badge">Exercícios de Criação</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">©️</div>
+                    <div class="termo-titulo">Direitos de Autor</div>
+                </div>
+                <div class="termo-definicao">
+                    São as regras que protegem as criações das pessoas, como textos, imagens, músicas e vídeos.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Não posso copiar um desenho de outra pessoa e dizer que é meu, porque tem direitos de autor.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Respeita sempre o trabalho dos outros e cria as tuas próprias coisas!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="licenca">
+                <div class="badge">Exercícios de Criação</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">📜</div>
+                    <div class="termo-titulo">Licença</div>
+                </div>
+                <div class="termo-definicao">
+                    É uma autorização que diz como podemos usar o trabalho de outras pessoas.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> Esta imagem tem uma licença que permite usar em trabalhos da escola.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> Verifica sempre se podes usar algo antes de o incluir no teu trabalho!
+                </div>
+            </div>
+
+            <div class="termo-card" data-termo="feedback">
+                <div class="badge">Exercícios de Colaboração</div>
+                <div class="termo-header">
+                    <div class="termo-emoji">💭</div>
+                    <div class="termo-titulo">Feedback</div>
+                </div>
+                <div class="termo-definicao">
+                    São opiniões, sugestões ou comentários que outras pessoas dão sobre o nosso trabalho.
+                </div>
+                <div class="termo-exemplo">
+                    <strong>Exemplo:</strong> A professora deu-me feedback sobre a minha apresentação, dizendo o que estava bem e o que podia melhorar.
+                </div>
+                <div class="termo-dica">
+                    <strong>Dica:</strong> O feedback ajuda-nos a melhorar e a aprender mais!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function pesquisarTermos() {
+            const input = document.getElementById('pesquisaInput');
+            const filter = input.value.toLowerCase();
+            const cards = document.querySelectorAll('.termo-card');
+
+            cards.forEach(card => {
+                const termo = card.getAttribute('data-termo').toLowerCase();
+                const titulo = card.querySelector('.termo-titulo').textContent.toLowerCase();
+                const definicao = card.querySelector('.termo-definicao').textContent.toLowerCase();
+                
+                if (termo.includes(filter) || titulo.includes(filter) || definicao.includes(filter)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+
